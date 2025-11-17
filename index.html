@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TJK85SWNHG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TJK85SWNHG');
+</script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -45,7 +56,20 @@
     <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="dns-prefetch" href="https://wa.link" />
-
+ 
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Flomo Notio",
+      "url": "https://www.flomonotio.com",
+      "sameAs": [
+        "https://www.flomonotio.com"
+      ],
+      "description": "Flomo Notio — Marketing & creative agency credited for design/marketing of this site."
+    }
+    </script>
+    
     <!-- Favicon and Touch Icons -->
      <link rel="icon" type="image/x-icon" href="img/favicon_io/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="img/favicon_io/apple-touch-icon.png" />
@@ -99,7 +123,7 @@
                 <nav class="fn-main-menu" id="swupMenu">
                   <ul>
                     <li class="fn-has-children fn-active">
-                      <a href="#contact">Contact Us</a>
+                      <a href="#">Contact Us</a>
                       <ul>
                         <li><a href="tel:+94779531516">Call Now</a></li>
                         <li><a href="https://wa.link/3plhxg" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
@@ -111,26 +135,26 @@
                       </ul>
                     </li>
                     <li class="fn-has-children">
-                      <a href="#colors">Available Colors</a>
+                      <a href="#">Available Colors</a>
                       <ul>
                         <li>
-                          <a href="#colors">Maroon</a>
+                          <a href="#about" class="fn-menu-btn">Maroon</a>
                         </li>
                         <li>
-                          <a href="#colors">Dark Blue</a>
+                          <a href="#about" class="fn-menu-btn">Dark Blue</a>
                         </li>
-                        <li><a href="#colors">Grey</a></li>
-                        <li><a href="#colors">Black</a></li>
+                        <li><a href="#about" class="fn-menu-btn">Grey</a></li>
+                        <li><a href="#about" class="fn-menu-btn">Black</a></li>
                       </ul>
                     </li>
                     <li class="fn-has-children">
-                      <a href="#locations">Locations</a>
+                      <a href="#">Locations</a>
                       <ul>
                         <li>
-                          <a href="#locations">Sri Lanka</a>
+                          <a href="#footerfn">Sri Lanka</a>
                         </li>
                         <li>
-                          <a href="#locations">Maldives</a>
+                          <a href="#footerfn">Maldives</a>
                         </li>
                       </ul>
                     </li>
@@ -146,7 +170,7 @@
       <!-- frame -->
       <div class="fn-frame">
         <div class="fn-frame-top">
-          <a href="#top" class="fn-logo">iA</a>
+          <a href="#" onclick="alert('Hello There!')" target="_blank" class="fn-logo">iA</a>
           <div class="fn-menu-btn">
             <span></span>
           </div>

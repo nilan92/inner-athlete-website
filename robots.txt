@@ -1,3 +1,11 @@
 User-agent: *
-Disallow: /private/
+# Allow the entire site except private admin/dev folders
 Allow: /
+Disallow: /private/
+Disallow: /cgi-bin/
+
+# Sitemap location (use the canonical domain in your pages)
+Sitemap: https://innerathleteactive.com/sitemap.xml
+
+# Optional polite recommendation (some crawlers respect this)
+Crawl-delay: 2
