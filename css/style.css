@@ -110,7 +110,7 @@ h5,
 .fn-h5,
 h6,
 .fn-h6 {
-  font-family: "Audiowide", sans-serif;
+  font-family: "Audiowide";
   color: rgb(0, 0, 0);
   font-weight: 500;
   line-height: 120%;
@@ -1155,7 +1155,7 @@ frame
 
 ------------------------------------------- */
 .fn-logo {
-  font-family: "Audiowide", sans-serif;
+  font-family: "Audiowide";
   font-size: 42px;
   font-weight: 500;
   line-height: 100%;
