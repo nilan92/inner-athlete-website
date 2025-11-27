@@ -204,13 +204,13 @@ $(function () {
                 opacity: 1,
                 y: 0,
                 scale: 1,
-                duration: 0.8,
+                duration: 0.5,
                 ease: 'power2.out',
                 scrollTrigger: {
                     trigger: section,
-                    start: "top 90%",
-                    end: "top 40%",
-                    scrub: 0.5,
+                    start: "top 85%",
+                    end: "bottom 15%",
+                    toggleActions: 'play none none reverse',
                     markers: false,
                     id: 'fn-up-' + index,
                     invalidateOnRefresh: true

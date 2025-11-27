@@ -36,10 +36,10 @@
 
     <!-- bootstrap grid css -->
     <link rel="stylesheet" href="css/plugins/bootstrap-grid.css" />
-    <!-- font awesome css -->
-    <link rel="stylesheet" href="css/plugins/font-awesome.min.css" />
-    <!-- Fallback for FontAwesome icons -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVJkEZSMUkrQ6usznlEWek56in38IyV5NQkng02o9VDgoGJocc9ZGMeKx+dYDSTv51m12/QExccj==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+    <!-- font awesome css - using CDN version (local version has missing font files) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Local version commented out - missing font files cause 404 errors -->
+    <!-- <link rel="stylesheet" href="css/plugins/font-awesome.min.css" /> -->
     <!-- swiper css -->
     <!-- <link rel="stylesheet" href="css/plugins/swiper.min.css" /> -->
     <!-- fancybox css -->
@@ -55,7 +55,12 @@
     
     <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://wa.link" />
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+    
+    <!-- Load fonts early in HTML head (faster than CSS @import) with display=swap -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Audiowide&display=swap" />
  
     <script type="application/ld+json">
     {
@@ -697,7 +702,7 @@
                           </li>
                         </ul>
                       </div>
-                      <p class="fn-light-soft fn-up">
+                      <p class="fn-light-soft">
                         © Copyright 2025 -
                         <a href="https://www.flomonotio.com" onclick="return confirm('Are you sure you want to visit the Creative Agency (Flomo Notio) website?')" target="_blank" rel="noopener noreferrer">Flomo Notio</a>
                       </p>
