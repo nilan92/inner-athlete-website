@@ -167,19 +167,19 @@ document.addEventListener("DOMContentLoaded", function () {
     /***************************
      menu
     ***************************/
-    const menuBtn = document.querySelector('.fn-menu-btn');
+    const menuBtns = document.querySelectorAll('.fn-menu-btn');
     const menu = document.querySelector('.fn-menu');
     const menuFrame = document.querySelector('.fn-menu-frame');
 
-    if (menuBtn) {
-        menuBtn.addEventListener("click", function () {
-            // Toggle class on all menu buttons (there might be cloned ones)
-            document.querySelectorAll('.fn-menu-btn').forEach(btn => {
-                btn.classList.toggle('fn-active');
-            });
+    if (menuBtns.length > 0) {
+        menuBtns.forEach(btn => {
+            btn.addEventListener("click", function () {
+                // Toggle class on all menu buttons to keep them in sync
+                menuBtns.forEach(b => b.classList.toggle('fn-active'));
 
-            if (menu) menu.classList.toggle('fn-active');
-            if (menuFrame) menuFrame.classList.toggle('fn-active');
+                if (menu) menu.classList.toggle('fn-active');
+                if (menuFrame) menuFrame.classList.toggle('fn-active');
+            });
         });
     }
 
