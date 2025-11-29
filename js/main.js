@@ -1,21 +1,15 @@
 
-$(function () {
-
+document.addEventListener("DOMContentLoaded", function () {
     "use strict";
 
     /***************************
-
     register gsap plugins
-
     ***************************/
     gsap.registerPlugin(ScrollTrigger);
 
     /***************************
-
     preloader
-    
     ***************************/
-
     var timeline = gsap.timeline();
 
     timeline.to(".fn-preloader-animation", {
@@ -24,13 +18,13 @@ $(function () {
 
     timeline.fromTo(
         ".fn-animation-1 .fn-h3", {
-            y: "30px",
-            opacity: 0
-        }, {
-            y: "0px",
-            opacity: 1,
-            stagger: 0.4
-        },
+        y: "30px",
+        opacity: 0
+    }, {
+        y: "0px",
+        opacity: 1,
+        stagger: 0.4
+    },
     );
 
     timeline.to(".fn-animation-1 .fn-h3", {
@@ -68,102 +62,154 @@ $(function () {
         opacity: 0,
         ease: 'sine',
         onComplete: function () {
-            $('.fn-preloader').addClass("fn-hidden");
+            const preloader = document.querySelector('.fn-preloader');
+            if (preloader) {
+                preloader.classList.add("fn-hidden");
+            }
             // Refresh ScrollTrigger after preloader completes
             ScrollTrigger.refresh();
         },
     }, "+=.2");
+
     /***************************
-
     anchor scroll
-
     ***************************/
-    $(document).on('click', 'a[href^="#"]', function (event) {
-        var href = $.attr(this, 'href');
-        
+    document.addEventListener('click', function (event) {
+        const targetLink = event.target.closest('a[href^="#"]');
+        if (!targetLink) return;
+
+        const href = targetLink.getAttribute('href');
+
         // Skip if href is just "#" or empty
         if (!href || href === '#' || href === '#!') {
-            return; // Let default behavior or onclick handler take over
+            return;
         }
 
         event.preventDefault();
 
-        var target = $(href);
-        
+        const targetElement = document.querySelector(href);
+
         // Check if target element exists
-        if (target.length === 0) {
+        if (!targetElement) {
             return;
         }
 
-        var offset = 0;
-
-        if ($(window).width() < 1200) {
+        let offset = 0;
+        if (window.innerWidth < 1200) {
             offset = 90;
         }
 
-        $('html, body').animate({
-            scrollTop: target.offset().top - offset
-        }, 400);
-    });
-    /***************************
+        // Use window.scrollTo with behavior smooth or GSAP for better control
+        // Using GSAP ScrollTo plugin would be ideal if loaded, but standard behavior is fine too
+        // Since we have GSAP, let's use it for consistency if we want, but window.scrollTo is native
 
+        const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+        const offsetPosition = elementPosition - offset;
+
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+        });
+    });
+
+    /***************************
     append
-
     ***************************/
-    $(document).ready(function () {
-        $(".fn-arrow").clone().appendTo(".fn-arrow-place");
-        $(".fn-dodecahedron").clone().appendTo(".fn-animation");
-        $(".fn-lines").clone().appendTo(".fn-lines-place");
-        $(".fn-main-menu ul li.fn-active > a").clone().appendTo(".fn-current-page");
-    });
+    // Helper to append clones
+    function appendClones(sourceSelector, targetSelector) {
+        const sources = document.querySelectorAll(sourceSelector);
+        const targets = document.querySelectorAll(targetSelector);
+
+        if (sources.length === 0 || targets.length === 0) return;
+
+        targets.forEach(target => {
+            sources.forEach(source => {
+                target.appendChild(source.cloneNode(true));
+            });
+        });
+    }
+
+    appendClones(".fn-arrow", ".fn-arrow-place");
+    appendClones(".fn-dodecahedron", ".fn-animation");
+    appendClones(".fn-lines", ".fn-lines-place");
+
+    // Special case for active menu item
+    const activeMenuItem = document.querySelector(".fn-main-menu ul li.fn-active > a");
+    const currentPageTarget = document.querySelector(".fn-current-page");
+    if (activeMenuItem && currentPageTarget) {
+        currentPageTarget.appendChild(activeMenuItem.cloneNode(true));
+    }
+
     /***************************
-
     back to top
-
     ***************************/
     const btt = document.querySelector(".fn-back-to-top .fn-link");
 
-    gsap.set(btt, {
-        x: -30,
-        opacity: 0,
-    });
+    if (btt) {
+        gsap.set(btt, {
+            x: -30,
+            opacity: 0,
+        });
 
-    gsap.to(btt, {
-        x: 0,
-        opacity: 1,
-        ease: 'sine',
-        scrollTrigger: {
-            trigger: "body",
-            start: "top -40%",
-            end: "top -40%",
-            toggleActions: "play none reverse none"
-        }
-    });
+        gsap.to(btt, {
+            x: 0,
+            opacity: 1,
+            ease: 'sine',
+            scrollTrigger: {
+                trigger: "body",
+                start: "top -40%",
+                end: "top -40%",
+                toggleActions: "play none reverse none"
+            }
+        });
+    }
+
     /***************************
-
      menu
-
     ***************************/
-    $('.fn-menu-btn').on("click", function () {
-        $('.fn-menu-btn').toggleClass('fn-active');
-        $('.fn-menu').toggleClass('fn-active');
-        $('.fn-menu-frame').toggleClass('fn-active');
-    });
-    /***************************
+    const menuBtn = document.querySelector('.fn-menu-btn');
+    const menu = document.querySelector('.fn-menu');
+    const menuFrame = document.querySelector('.fn-menu-frame');
 
+    if (menuBtn) {
+        menuBtn.addEventListener("click", function () {
+            // Toggle class on all menu buttons (there might be cloned ones)
+            document.querySelectorAll('.fn-menu-btn').forEach(btn => {
+                btn.classList.toggle('fn-active');
+            });
+
+            if (menu) menu.classList.toggle('fn-active');
+            if (menuFrame) menuFrame.classList.toggle('fn-active');
+        });
+    }
+
+    /***************************
     main menu
-
     ***************************/
-    $('.fn-has-children a').on('click', function () {
-        $('.fn-has-children ul').removeClass('fn-active');
-        $('.fn-has-children a').removeClass('fn-active');
-        $(this).toggleClass('fn-active');
-        $(this).next().toggleClass('fn-active');
+    const menuLinks = document.querySelectorAll('.fn-has-children > a');
+
+    menuLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+            // Prevent default if it's just a toggle
+            e.preventDefault();
+
+            // Remove active class from all other submenus and links
+            document.querySelectorAll('.fn-has-children ul').forEach(ul => ul.classList.remove('fn-active'));
+            document.querySelectorAll('.fn-has-children > a').forEach(a => {
+                if (a !== this) a.classList.remove('fn-active');
+            });
+
+            // Toggle current
+            this.classList.toggle('fn-active');
+            const nextUl = this.nextElementSibling;
+            if (nextUl) {
+                nextUl.classList.toggle('fn-active');
+            }
+        });
     });
+
     /***************************
-
     progressbar
-
     ***************************/
     gsap.to('.fn-progress', {
         height: '100%',
@@ -172,10 +218,9 @@ $(function () {
             scrub: 0.3
         }
     });
+
     /***************************
-
     scroll animations
-
     ***************************/
 
     // Set initial state for all .fn-up elements immediately to prevent flash
@@ -188,7 +233,7 @@ $(function () {
 
     // Initialize scroll animations - only run once
     let scrollAnimationsInitialized = false;
-    
+
     function initScrollAnimations() {
         if (scrollAnimationsInitialized) return;
         scrollAnimationsInitialized = true;
@@ -227,8 +272,9 @@ $(function () {
     const scaleImage = document.querySelectorAll(".fn-scale");
 
     scaleImage.forEach((section) => {
-        var value1 = $(section).data("value-1");
-        var value2 = $(section).data("value-2");
+        var value1 = section.dataset.value1 || 1; // Default fallback
+        var value2 = section.dataset.value2 || 1.2;
+
         gsap.fromTo(section, {
             ease: 'sine',
             scale: value1,
@@ -245,11 +291,11 @@ $(function () {
 
     const parallaxImage = document.querySelectorAll(".fn-parallax");
 
-
-    if ($(window).width() > 960) {
+    if (window.innerWidth > 960) {
         parallaxImage.forEach((section) => {
-            var value1 = $(section).data("value-1");
-            var value2 = $(section).data("value-2");
+            var value1 = section.dataset.value1 || 0;
+            var value2 = section.dataset.value2 || 0;
+
             gsap.fromTo(section, {
                 ease: 'sine',
                 y: value1,
@@ -268,7 +314,7 @@ $(function () {
     const rotate = document.querySelectorAll(".fn-rotate");
 
     rotate.forEach((section) => {
-        var value = $(section).data("value");
+        var value = section.dataset.value || 360;
         gsap.fromTo(section, {
             ease: 'sine',
             rotate: 0,
