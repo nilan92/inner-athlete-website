@@ -1,0 +1,172 @@
+# ======================================================================
+# Performance Optimization for innerAthlete Website
+# ======================================================================
+
+# Enable the rewrite engine
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  
+  # Force HTTPS (if not already)
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+  
+  # Force www subdomain
+  RewriteCond %{HTTP_HOST} ^innerathleteactive\.com [NC]
+  RewriteRule ^(.*)$ https://www.innerathleteactive.com/$1 [L,R=301]
+</IfModule>
+
+# ======================================================================
+# Text Compression (GZIP/Deflate)
+# ======================================================================
+
+<IfModule mod_deflate.c>
+  # Compress HTML, CSS, JavaScript, Text, XML and fonts
+  AddOutputFilterByType DEFLATE application/javascript
+  AddOutputFilterByType DEFLATE application/json
+  AddOutputFilterByType DEFLATE application/rss+xml
+  AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
+  AddOutputFilterByType DEFLATE application/x-font
+  AddOutputFilterByType DEFLATE application/x-font-opentype
+  AddOutputFilterByType DEFLATE application/x-font-otf
+  AddOutputFilterByType DEFLATE application/x-font-truetype
+  AddOutputFilterByType DEFLATE application/x-font-ttf
+  AddOutputFilterByType DEFLATE application/x-javascript
+  AddOutputFilterByType DEFLATE application/xhtml+xml
+  AddOutputFilterByType DEFLATE application/xml
+  AddOutputFilterByType DEFLATE font/opentype
+  AddOutputFilterByType DEFLATE font/otf
+  AddOutputFilterByType DEFLATE font/ttf
+  AddOutputFilterByType DEFLATE font/woff
+  AddOutputFilterByType DEFLATE font/woff2
+  AddOutputFilterByType DEFLATE image/svg+xml
+  AddOutputFilterByType DEFLATE image/x-icon
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE text/html
+  AddOutputFilterByType DEFLATE text/javascript
+  AddOutputFilterByType DEFLATE text/plain
+  AddOutputFilterByType DEFLATE text/xml
+
+  # Remove browser bugs (only needed for really old browsers)
+  BrowserMatch ^Mozilla/4 gzip-only-text/html
+  BrowserMatch ^Mozilla/4\.0[678] no-gzip
+  BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+  Header append Vary User-Agent
+</IfModule>
+
+# ======================================================================
+# Browser Caching (Leverage Browser Cache)
+# ======================================================================
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  
+  # Default expiration: 1 hour
+  ExpiresDefault "access plus 1 hour"
+  
+  # HTML and data files - 1 hour
+  ExpiresByType text/html "access plus 1 hour"
+  ExpiresByType text/xml "access plus 1 hour"
+  ExpiresByType application/xml "access plus 1 hour"
+  ExpiresByType application/json "access plus 1 hour"
+  
+  # CSS and JavaScript - 1 week
+  ExpiresByType text/css "access plus 1 week"
+  ExpiresByType application/javascript "access plus 1 week"
+  ExpiresByType text/javascript "access plus 1 week"
+  
+  # Favicon and graphics - 1 month
+  ExpiresByType image/gif "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/jpg "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType image/x-icon "access plus 1 month"
+  ExpiresByType image/vnd.microsoft.icon "access plus 1 month"
+  
+  # Web fonts - 1 month
+  ExpiresByType font/ttf "access plus 1 month"
+  ExpiresByType font/woff "access plus 1 month"
+  ExpiresByType font/woff2 "access plus 1 month"
+  ExpiresByType application/font-woff "access plus 1 month"
+  ExpiresByType application/font-woff2 "access plus 1 month"
+  ExpiresByType application/x-font-woff "access plus 1 month"
+  ExpiresByType application/x-font-ttf "access plus 1 month"
+  ExpiresByType application/vnd.ms-fontobject "access plus 1 month"
+</IfModule>
+
+# Alternative for servers without mod_expires
+<IfModule mod_headers.c>
+  # Cache static assets for 1 month
+  <FilesMatch "\.(jpg|jpeg|png|gif|webp|svg|ico|css|js|woff|woff2|ttf|eot)$">
+    Header set Cache-Control "max-age=2592000, public"
+  </FilesMatch>
+  
+  # Cache HTML for 1 hour
+  <FilesMatch "\.(html|htm)$">
+    Header set Cache-Control "max-age=3600, public, must-revalidate"
+  </FilesMatch>
+  
+  # Security headers
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set X-XSS-Protection "1; mode=block"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  
+  # Disable ETags (optional but recommended for better caching)
+  Header unset ETag
+  FileETag None
+</IfModule>
+
+# ======================================================================
+# MIME Types
+# ======================================================================
+
+<IfModule mod_mime.c>
+  # JavaScript
+  AddType application/javascript js
+  
+  # Web fonts
+  AddType application/font-woff woff
+  AddType application/font-woff2 woff2
+  AddType application/vnd.ms-fontobject eot
+  AddType font/ttf ttf
+  AddType font/otf otf
+  
+  # Images
+  AddType image/webp webp
+  AddType image/svg+xml svg svgz
+  
+  # Allow SVG compression
+  AddEncoding gzip svgz
+</IfModule>
+
+# ======================================================================
+# Security & Performance
+# ======================================================================
+
+# Prevent access to hidden files
+<FilesMatch "^\.">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# Protect WordPress/CMS files (if applicable)
+<FilesMatch "(wp-config\.php|\.htaccess|\.htpasswd)">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# ======================================================================
+# Note for GitHub Pages Users
+# ======================================================================
+# If you're hosting on GitHub Pages, most of these server configurations
+# are automatically handled by GitHub's CDN. This file is for Apache servers.
+# GitHub Pages automatically provides:
+# - HTTPS enforcement
+# - GZIP compression
+# - CDN caching
+# - www redirect (based on CNAME)
+#
+# You can ignore this file if deploying to GitHub Pages.
+# ======================================================================

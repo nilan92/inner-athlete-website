@@ -38,11 +38,24 @@
   <meta name="twitter:title" content="innerAthlete - Inclusive Activewear" />
   <meta name="twitter:description" content="Premium modest and inclusive activewear for your active lifestyle." />
 
+  <!-- Preload critical CSS -->
+  <link rel="preload" href="css/style.css" as="style" />
+  <link rel="preload" href="css/plugins/bootstrap-grid.css" as="style" />
+
+  <!-- Preload LCP image for faster initial render -->
+  <link rel="preload" href="img/new/inner_athelete_modest_best_activewear_srilanka_xxx_11.jpg" as="image"
+    imagesrcset="img/new/inner_athelete_modest_best_activewear_srilanka_xxx_11_mobile.jpg 480w, img/new/inner_athelete_modest_best_activewear_srilanka_xxx_11.jpg 864w"
+    imagesizes="(max-width: 600px) 480px, 864px" />
   <!-- bootstrap grid css -->
   <link rel="stylesheet" href="css/plugins/bootstrap-grid.css" />
   <!-- font awesome css - using CDN version (local version has missing font files) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Load Font Awesome asynchronously to avoid render blocking -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print"
+    onload="this.media='all'" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+  </noscript>
   <!-- flomonotio scss -->
   <link rel="stylesheet" href="css/style.css" />
 
@@ -53,14 +66,20 @@
   <link rel="canonical" href="https://www.innerathleteactive.com" />
 
   <!-- Preconnect for performance -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="dns-prefetch" href="https://wa.link" />
   <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
 
   <!-- Load fonts early in HTML head (faster than CSS @import) with display=swap -->
+  <!-- Preload critical font families -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Audiowide&display=swap" />
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Audiowide&display=swap"
+    media="print" onload="this.media='all'" />
+  <noscript>
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Audiowide&display=swap" />
+  </noscript>
 
   <script type="application/ld+json">
     {
@@ -297,7 +316,7 @@
                     <img src="img/new/inner_athelete_modest_best_activewear_srilanka_xxx_11.jpg"
                       srcset="img/new/inner_athelete_modest_best_activewear_srilanka_xxx_11_mobile.jpg 480w, img/new/inner_athelete_modest_best_activewear_srilanka_xxx_11.jpg 864w"
                       sizes="(max-width: 600px) 480px, 864px" alt="Premium modest activewear - innerAthlete" width="864"
-                      height="1184" loading="lazy" class="fn-scale" data-value-1="1" data-value-2="1.2" />
+                      height="1184" fetchpriority="high" class="fn-scale" data-value-1="1" data-value-2="1.2" />
                   </div>
                 </div>
               </div>
