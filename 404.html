@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+        body {
+            font-family: 'Space Mono', monospace;
+            overflow: hidden;
+        }
+
+        /* Star Animation */
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration) ease-in-out infinite;
+            opacity: 0;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: var(--opacity); transform: scale(1.2); }
+            100% { opacity: 0; transform: scale(0.5); }
+        }
+
+        /* Float Animation for elements */
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .float-delayed {
+            animation: float 6s ease-in-out 3s infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        /* Gradient Text */
+        .text-gradient {
+            background: linear-gradient(to right, #a78bfa, #3b82f6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-white h-screen w-full flex flex-col items-center justify-center relative">
+
+    <!-- Background Stars Container -->
+    <div id="star-container" class="absolute inset-0 z-0 pointer-events-none"></div>
+
+    <!-- Main Content -->
+    <main class="z-10 text-center px-4 max-w-2xl mx-auto">
+        
+        <!-- 404 Glitch Effect Placeholder -->
+        <div class="relative mb-8 float">
+            <h1 class="text-9xl md:text-[12rem] font-bold tracking-tighter text-slate-800 absolute top-1 left-1 select-none blur-sm">Error</h1>
+            <h1 class="text-9xl md:text-[12rem] font-bold tracking-tighter text-gradient relative z-10">Error</h1>
+            
+            <!-- Decorational Planet SVG -->
+            <div class="absolute -top-10 -right-10 md:-right-20 w-24 h-24 md:w-32 md:h-32 opacity-80 float-delayed">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="text-purple-400 w-full h-full">
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="M3.6 9h16.8" />
+                    <path d="M3.6 15h16.8" />
+                    <path d="M11.5 3a17 17 0 0 0 0 18" />
+                    <path d="M12.5 3a17 17 0 0 1 0 18" />
+                </svg>
+            </div>
+        </div>
+
+        <h2 class="text-2xl md:text-4xl font-bold mb-4">Houston, we have a problem.</h2>
+        
+        <p class="text-slate-400 text-lg mb-8 max-w-md mx-auto">
+            The page you are looking for has drifted into a black hole or never existed in this galaxy.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a href="/" class="group relative px-8 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg transition-all duration-300 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)]">
+                Return Home
+                <span class="absolute -right-2 top-0 text-xl opacity-0 group-hover:opacity-100 group-hover:-right-8 transition-all duration-300">🚀</span>
+            </a>
+            
+            <button onclick="history.back()" class="px-8 py-3 border border-slate-600 hover:border-slate-400 text-slate-300 hover:text-white rounded-lg transition-colors">
+                Go Back
+            </button>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="absolute bottom-4 text-slate-600 text-sm z-10">
+        <p>Error Code: 404 // Signal Lost</p>
+        <p>Website designed by // </p> <a href="www.flomonotio.com">Flomo Notio</a>
+
+    </footer>
+
+    <script>
+        // Generate Star Field
+        const starContainer = document.getElementById('star-container');
+        const starCount = 100;
+
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            
+            // Random positioning
+            const x = Math.random() * 100;
+            const y = Math.random() * 100;
+            
+            // Random animation properties
+            const duration = 2 + Math.random() * 3 + 's';
+            const delay = Math.random() * 5 + 's';
+            const opacity = 0.5 + Math.random() * 0.5;
+
+            star.style.left = `${x}%`;
+            star.style.top = `${y}%`;
+            star.style.setProperty('--duration', duration);
+            star.style.setProperty('--opacity', opacity);
+            star.style.animationDelay = delay;
+
+            starContainer.appendChild(star);
+        }
+
+        // Mouse Parallax Effect
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            const moveX = (x - 0.5) * 20;
+            const moveY = (y - 0.5) * 20;
+
+            starContainer.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        });
+    </script>
+</body>
+</html>
