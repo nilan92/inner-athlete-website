@@ -4,8 +4,9 @@ Allow: /
 Disallow: /private/
 Disallow: /cgi-bin/
 
+Disallow: /.git/
+Disallow: /README.md
+Disallow: /LICENSE
+
 # Sitemap location (use the canonical domain in your pages)
 Sitemap: https://www.innerathleteactive.com/sitemap.xml
-
-# Optional polite recommendation (some crawlers respect this)
-Crawl-delay: 2

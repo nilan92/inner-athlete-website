@@ -15,6 +15,7 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#000000" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
   <!-- SEO Meta Tags -->
@@ -31,12 +32,15 @@
     content="Premium activewear that combines modesty with performance. Shop modest yoga wear, hijab activewear, and more." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.innerathleteactive.com" />
-  <meta property="og:image" content="img/new/inner_athelete_modest_best_activewear_srilanka_xxx_11.png" />
+  <meta property="og:image" content="https://www.innerathleteactive.com/img/social_preview.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
 
   <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="innerAthlete - Inclusive Activewear" />
   <meta name="twitter:description" content="Premium modest and inclusive activewear for your active lifestyle." />
+  <meta name="twitter:image" content="https://www.innerathleteactive.com/img/social_preview.png" />
 
   <!-- Preload critical CSS -->
   <link rel="preload" href="css/style.min.css?v=174b51f0" as="style" />
@@ -82,17 +86,31 @@
   </noscript>
 
   <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Flomo Notio",
-      "url": "https://www.innerathleteactive.com",
-      "sameAs": [
-        "https://www.flomonotio.com"
-      ],
-      "description": "Flomo Notio — Marketing & creative agency credited for design/marketing of this site."
-    }
-    </script>
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "innerAthlete",
+        "url": "https://www.innerathleteactive.com",
+        "logo": "https://www.innerathleteactive.com/img/favicon_io/android-chrome-512x512.png",
+        "sameAs": [
+          "https://www.instagram.com/inner_athlete_active"
+        ],
+        "description": "Premium modest activewear designed for confident movement."
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "innerAthlete",
+        "url": "https://www.innerathleteactive.com",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://www.innerathleteactive.com/?s={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    ]
+  </script>
 
   <!-- Favicon and Touch Icons -->
   <link rel="icon" type="image/x-icon" href="img/favicon_io/favicon.ico">
