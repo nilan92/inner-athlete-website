@@ -54,7 +54,7 @@ nav {
     /* border-bottom: 1px solid #eee; */
 }
 
-.logo { font-size: 3rem; letter-spacing: -0.5px; padding-left: 3vh; color: #ffffff; }
+.logo { font-size: 3rem; letter-spacing: -0.5px; padding-left: 3vh; pointer-events: auto; color: #ffffff; }
 .cart-icon { font-size: 2rem; position: relative; cursor: pointer; padding-right: 2vh; pointer-events: auto; color: #ffffff; }
 #cart-badge {
     position: absolute; top: -5px; right: 10px;
