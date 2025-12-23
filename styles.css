@@ -39,13 +39,18 @@
 /* Optional: Make navbar sticky 'under' this bar if you want, 
    or just let it scroll away. Current sticky nav works fine with this. */
 
+html, body {
+    max-width: 100%;
+    overflow-x: hidden; /* THE FIX: Cuts off anything sticking out sideways */
+    position: relative; /* Helps contain absolute elements */
+}
+
 body {
     font-family: var(--font-body); /* Set default to Montserrat */
     background: var(--bg);
     margin: 0;
     padding-bottom: 0;
     color: #333;
-    overflow-x: hidden;
     -webkit-tap-highlight-color: transparent;
 }
 
