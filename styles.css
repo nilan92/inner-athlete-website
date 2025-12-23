@@ -41,8 +41,7 @@
 
 html, body {
     max-width: 100%;
-    overflow-x: hidden; /* THE FIX: Cuts off anything sticking out sideways */
-    position: relative; /* Helps contain absolute elements */
+    overflow-x: clip; /* THE FIX: Cuts off anything sticking out sideways */
 }
 
 body {
