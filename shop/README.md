@@ -48,7 +48,16 @@ shop/
 ├── script.js        # Core logic (Geolocation, Cart, UI)
 └── img/             # Product assets (WebP optimized)
 
-## 🚀 How to Run Locally
+## �️ Building/Minifying Assets
+After updating `styles.css` or `script.js`, run the minification script to generate optimized versions:
+
+```bash
+./minify.sh
+```
+
+This will create `styles.min.css` and `script.min.js` using `minify` for CSS and `terser` for JS.
+
+## �🚀 How to Run Locally
 Clone the repository.
 
 Navigate to the shop folder.

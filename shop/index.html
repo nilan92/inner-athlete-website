@@ -14,13 +14,15 @@
 
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
     
     <title>InnerAthlete | Premium Modest Activewear</title>
     <meta name="description" content="Discover InnerAthlete: High-performance modest activewear designed for the modern woman. Shop longline tops, sports hijabs, and full-coverage sets tailored for movement and elegance.">
     <meta name="keywords" content="modest activewear, sports hijab, longline active top, modest gym wear, performance hijab, InnerAthlete">
     <meta name="author" content="InnerAthlete">
     <link rel="canonical" href="https://www.innerathleteactive.com/shop/">
+    <link rel="manifest" href="site.webmanifest">
 
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://innerathleteactive.com/">
@@ -85,20 +87,19 @@
     <link rel="icon" type="image/png" sizes="512x512" href="img/android-chrome-512x512.png">
 
 
-    <link rel="manifest" href="../site.webmanifest">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=1.1">
+    <link rel="stylesheet" href="styles.min.css?v=1.2">
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <div id="promo-bar">
-        <p>🎉 <strong>Launch Special:</strong> Free Shipping to Maldives on orders over Rf 1000!</p>
-        <button onclick="document.getElementById('promo-bar').style.display='none'">&times;</button>
-    </div>
+    <p id="promo-text">🎉 <strong>Welcome:</strong> Premium Modest Activewear</p>
+    <button onclick="document.getElementById('promo-bar').style.display='none'" aria-label="Close Banner">&times;</button>
+</div>
 
     <header class="hero-section">
         <div class="hero-bg"></div>
@@ -130,7 +131,7 @@
         <div style="display: flex; align-items: center; gap: 15px;">
         <span id="nav-flag" style="font-size: 1.5rem; cursor: default;"></span>
 
-            <div class="cart-icon" onclick="toggleCart(true)">
+            <div class="cart-icon" onclick="toggleCart(true)" aria-label="Open shopping cart">
                 <i class="fa-solid fa-bag-shopping"></i>
                 <span id="cart-badge" class="hidden">0</span>
             </div>
@@ -232,7 +233,7 @@
             &copy; 2025 innerAthlete. All Rights Reserved.
 
                 <div class="region-selector" style="margin-top: 15px;">
-                    <span>Region: </span>
+                    <label for="region-select">Region: </label>
                     <select id="region-select" onchange="manualChangeRegion(this.value)">
                         <option value="US">🇺🇸 Rest of World (USD)</option>
                         <option value="LK">🇱🇰 Sri Lanka (LKR)</option>
@@ -246,7 +247,7 @@
     <aside id="cart-sidebar" class="sidebar">
         <div class="sidebar-header">
             <h2>Your Bag</h2>
-            <button class="close-btn" onclick="toggleCart(false)">
+            <button class="close-btn" onclick="toggleCart(false)" aria-label="Close Cart">
                 <i class="fa-solid fa-xmark"></i>
             </button>
         </div>
@@ -267,7 +268,7 @@
 
     <div id="size-modal" class="modal">
         <div class="modal-content fade-in">
-            <span class="close-modal" onclick="toggleSizeModal(false)">&times;</span>
+            <span class="close-modal" onclick="toggleSizeModal(false)" aria-label="Close size guide">&times;</span>
             <h3><i class="fa-solid fa-ruler-combined"></i> Size Guide</h3>
             <table class="size-table">
                 <tr><th>Size</th><th>Shoulder (in)</th><th>Chest (in)</th><th>Length (in)</th></tr>
@@ -279,6 +280,6 @@
         </div>
     </div>
 
-    <script src="script.js?v=1.1" defer></script>
+    <script src="script.min.js?v=1.2" defer></script>
 </body>
 </html>

@@ -154,6 +154,18 @@ function applyRegionSettings(countryCode) {
         phoneLink.href = `tel:${activePhoneNumber}`;
     }
 
+    // --- 5. NEW: DYNAMIC BANNER TEXT ---
+    const promoText = document.getElementById("promo-text");
+    if (promoText) {
+        if (userRegion.country === 'MV') {
+            promoText.innerHTML = `🎉 <strong>Maldives Launch:</strong> Exclusive Full Sets Available Now!`;
+        } else if (userRegion.country === 'LK') {
+            promoText.innerHTML = `🚚 <strong>Island-wide Delivery:</strong> Get your gear in 2-3 working days.`;
+        } else {
+            promoText.innerHTML = `✈️ <strong>International Shipping:</strong> Now shipping globally.`;
+        }
+    }
+
     // --- NEW: Refresh Cart Prices ---
     // We only run this if the cart actually has items
     if (cart.length > 0) {
@@ -208,7 +220,7 @@ function renderProducts() {
         if (p.sizes.length > 0) {
             sizeSelectorHTML = `
                 <div class="size-row">
-                    <label>Size</label>
+                    <label for="size-${p.id}">Size</label>
                     <button class="size-btn" onclick="toggleSizeModal(true)">Guide</button>
                 </div>
                 <select id="size-${p.id}">${p.sizes.map(s => `<option value="${s}">${s}</option>`).join('')}</select>
@@ -481,10 +493,13 @@ function updateCartUI() {
     badge.classList.toggle("hidden", count === 0);
 
     if (cart.length === 0) {
-        itemsList.innerHTML = `<div style="text-align:center; padding:20px; color:#999;">
-            <i class="fa-solid fa-basket-shopping" style="font-size:2rem; margin-bottom:10px;"></i>
-            <p>Your bag is empty</p>
-        </div>`;
+        itemsList.innerHTML = `
+            <li style="list-style:none; text-align:center; padding:20px; color:#999;">
+                <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+                    <i class="fa-solid fa-basket-shopping" style="font-size:2rem;"></i>
+                    <p style="margin:0;">Your bag is empty</p>
+                </div>
+            </li>`;
         totalEl.innerText = `${userRegion.symbol} 0.00`; //dynamic symbol
         return;
     }
@@ -690,3 +705,42 @@ document.addEventListener('DOMContentLoaded', () => {
     // Start the loop
     typeEffect();
 });
+
+// --- CHRISTMAS SNOW EFFECT ---
+// --- ELEGANT SNOW EFFECT ---
+function createSnowflake() {
+    const snowflake = document.createElement('div');
+    snowflake.classList.add('snowflake');
+    
+    // 1. Random Size (Much smaller: 2px to 5px)
+    const size = Math.random() * 3 + 2; 
+    snowflake.style.width = `${size}px`;
+    snowflake.style.height = `${size}px`;
+    
+    // 2. Random Horizontal Position
+    snowflake.style.left = Math.random() * 100 + 'vw';
+    
+    // 3. Random Opacity (Very subtle: 0.1 to 0.5)
+    snowflake.style.opacity = Math.random() * 0.4 + 0.1;
+
+    // 4. Random Fall Duration (Slower: 10s to 20s)
+    const duration = Math.random() * 10 + 10;
+    
+    // 5. Animation
+    snowflake.animate([
+        { transform: 'translateY(0px)' }, 
+        { transform: `translateY(100vh)` }
+    ], {
+        duration: duration * 1000,
+        easing: 'linear',
+        fill: 'forwards'
+    });
+
+    document.body.appendChild(snowflake);
+
+    // Clean up
+    setTimeout(() => { snowflake.remove(); }, duration * 1000);
+}
+
+// Start the snow
+setInterval(createSnowflake, 200); // Less frequent (every 200ms) for a cleaner look
