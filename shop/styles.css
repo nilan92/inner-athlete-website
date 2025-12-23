@@ -9,6 +9,36 @@
     --font-body: 'Montserrat', sans-serif; /* Clean fashion font */
 }
 
+#promo-bar {
+    background-color: var(--accent); /* Uses your neon green */
+    color: #000;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 0.85rem;
+    position: relative;
+    z-index: 1001; /* Above navbar */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+#promo-bar p { margin: 0; }
+
+#promo-bar button {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    line-height: 1;
+    opacity: 0.6;
+}
+
+#promo-bar button:hover { opacity: 1; }
+
+/* Optional: Make navbar sticky 'under' this bar if you want, 
+   or just let it scroll away. Current sticky nav works fine with this. */
+
 body {
     font-family: var(--font-body); /* Set default to Montserrat */
     background: var(--bg);
@@ -50,12 +80,11 @@ nav {
     position: sticky;
     top: 0;
     z-index: 100;
-    pointer-events: none;
     /* border-bottom: 1px solid #eee; */
 }
 
-.logo { font-size: 3rem; letter-spacing: -0.5px; padding-left: 3vh; pointer-events: auto; color: #ffffff; }
-.cart-icon { font-size: 2rem; position: relative; cursor: pointer; padding-right: 2vh; pointer-events: auto; color: #ffffff; }
+.logo { font-size: 3rem; letter-spacing: -0.5px; padding-left: 3vh; color: #ffffff; }
+.cart-icon { font-size: 2rem; position: relative; cursor: pointer; padding-right: 2vh; color: #ffffff; }
 #cart-badge {
     position: absolute; top: -5px; right: 10px;
     background: var(--accent); color: rgb(0, 0, 0);
@@ -530,6 +559,53 @@ select {
     gap: 15px;
 }
 
+/* --- ADVANCED SCROLL REVEALS --- */
+
+/* 1. Base State (Hidden) */
+.gallery-wrapper {
+    opacity: 0;
+    transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Elegant ease */
+}
+
+/* 2. Active State (Visible) */
+.gallery-wrapper.active {
+    opacity: 1;
+    transform: translate(0, 0) !important; /* Reset any movement */
+}
+
+/* --- MOBILE ANIMATIONS (Default) --- */
+/* Odd items (1, 3...) swipe from Left */
+.gallery-wrapper:nth-child(odd) {
+    transform: translateX(-50px);
+}
+
+/* Even items (2...) swipe from Right */
+.gallery-wrapper:nth-child(even) {
+    transform: translateX(50px);
+}
+
+/* --- DESKTOP OVERRIDES (Min-width 768px) --- */
+@media (min-width: 768px) {
+    
+    /* Item 1: From Left */
+    .gallery-wrapper:nth-child(1) {
+        transform: translateX(-80px); 
+        transition-delay: 0.1s;
+    }
+
+    /* Item 2 (Middle): From Bottom (Up) */
+    .gallery-wrapper:nth-child(2) {
+        transform: translateY(80px); /* Overrides the mobile X-axis */
+        transition-delay: 0.3s; /* Staggered delay */
+    }
+
+    /* Item 3: From Right */
+    .gallery-wrapper:nth-child(3) {
+        transform: translateX(80px); /* Overrides the mobile X-axis */
+        transition-delay: 0.5s;
+    }
+}
+
 .gallery-card {
     position: relative;
     overflow: hidden;
@@ -612,6 +688,11 @@ select {
     color: white;
 }
 
+@media (max-width: 768px) {
+    .section-title { font-size: 1rem; padding: 15px 0; }
+    
+}
+
 /* --- FOOTER --- */
 footer {
     background: #111;
@@ -639,10 +720,21 @@ footer {
 .footer-col a:hover { color: #8afd79; }
 
 .footer-bottom {
-    text-align: center;
-    padding-top: 20px;
-    font-size: 0.8rem;
+    display: flex;
+    flex-direction: column-reverse; /* Mobile: Copyright at bottom */
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding-top: 25px;
+    border-top: 1px solid #222;
     color: #555;
+    font-size: 0.8rem;
+}
+
+@media (min-width: 768px) {
+    .footer-bottom {
+        flex-direction: row; /* Desktop: Inline */
+    }
 }
 
 /* --- SCROLL ANIMATION UTILS --- */
@@ -721,4 +813,90 @@ footer {
     letter-spacing: 2px;
     text-transform: uppercase;
     color: #aaa;
+}
+
+/* --- STYLED FOOTER SELECTOR --- */
+.region-selector {
+    display: flex;
+    align-items: center; /* This forces the Label and Dropdown to be perfectly centered */
+    gap: 5px;
+    
+    /* Make the box more subtle/slim */
+    background: transparent; 
+    border: 1px solid #333;
+    padding: 4px 12px;
+    border-radius: 4px;
+    position: relative; /* Needed for our custom arrow */
+    height: auto;
+}
+
+.region-selector:hover {
+    border-color: #555;
+}
+
+.region-selector span {
+    color: #666;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    /* FIX: Force line-height to 1 to remove gap calculations */
+    line-height: 1; 
+    
+    /* FIX: Nudge it up 1px to match the select's natural baseline */
+    transform: translateY(-1px); 
+    
+    /* Removed padding-top */
+    margin: 0;
+}
+
+#region-select {
+    background: transparent;
+    color: #ddd; /* Lighter text for better contrast */
+    border: none;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    cursor: pointer;
+    outline: none;
+    
+    /* Reset margins/padding */
+    margin: 0;
+    padding: 0 10px 0 0; /* Room for arrow */
+    
+    /* FIX: Match line-height closely to label */
+    line-height: 1.1;
+    
+    /* Hide default arrow */
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+#region-select:hover {
+    color: #bbb;
+}
+
+/* The Custom Arrow (Tiny Grey Triangle) */
+.region-selector::after {
+    content: '▼';
+    font-size: 0.5rem;
+    color: #666;
+    position: absolute;
+    right: 10px;
+    pointer-events: none; /* Allows click to pass through to the select */
+    top: 50%;
+    transform: translateY(-50%); /* Perfectly centers arrow vertically */
+}
+
+/* --- TYPEWRITER CURSOR --- */
+#cursor {
+    display: inline-block;
+    color: var(--accent); /* Uses your neon green */
+    font-weight: bold;
+    margin-left: 2px;
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
 }

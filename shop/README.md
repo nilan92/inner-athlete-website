@@ -59,9 +59,3 @@ Note: Geolocation features require a live environment or a local server to avoid
 
 ## 👨‍💻 Developer Notes
 Built by Flomo Notio. This module demonstrates how to implement complex e-commerce logic (Region-based inventory, Dynamic Pricing) using only lightweight, native web technologies for maximum performance and zero backend maintenance costs.
-
-
-### Why this is good for you:
-1.  **"Smart" Words:** Terms like *State Management*, *Serverless*, *Runtime JS*, and *CORS* show you understand concepts beyond just "making a website."
-2.  **Problem/Solution:** It explains *why* you used WhatsApp (lean startup model) and *how* you solved the Maldives inventory issue.
-3.  **Separation:** By putting this in `shop/`, you keep your root folder clean while giving tech-savvy visitors exactly what they want to read when they browse your code.

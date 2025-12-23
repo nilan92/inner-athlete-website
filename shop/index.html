@@ -95,13 +95,19 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div id="promo-bar">
+        <p>🎉 <strong>Launch Special:</strong> Free Shipping to Maldives on orders over Rf 1000!</p>
+        <button onclick="document.getElementById('promo-bar').style.display='none'">&times;</button>
+    </div>
 
     <header class="hero-section">
         <div class="hero-bg"></div>
         
         <div class="hero-content">
             <div class="hero-text">
-                <h4 class="fade-in-up delay-1">Premium Modest Activewear</h4>
+                <h4 class="fade-in-up delay-1" style="min-height: 1.5em;">
+    <span id="typewriter-text"></span><span id="cursor">|</span>
+</h4>
                 <h1 class="fade-in-up delay-2">Uncompromising<br>Performance.</h1>
                 <p class="fade-in-up delay-3">Designed for the woman who moves with purpose. Experience the perfect fusion of full coverage and elite athletic engineering.</p>
                 <button class="btn-hero fade-in-up delay-4" onclick="document.getElementById('shop-section').scrollIntoView({behavior: 'smooth'})">
@@ -205,7 +211,7 @@
                 <h4>Contact</h4>
                 <p><i class="fa-solid fa-envelope"></i> <a href="mailto:inquiries.innerathlete@outlook.com"
                           onclick="return confirm('e-mail innerAthlete?')">e-mail us</a></p>
-                <p><i class="fa-brands fa-whatsapp"></i> <a id="footer-phone" href="tel:+94771889532"
+                <p><i class="fa-solid fa-phone"></i> <a id="footer-phone" href="tel:+94771889532"
                             onclick="return confirm('Call innerAthlete?')">+94 77 188 9532</a></p>
                 
             </div>
@@ -227,7 +233,7 @@
 
                 <div class="region-selector" style="margin-top: 15px;">
                     <span>Region: </span>
-                    <select id="region-select" onchange="manualChangeRegion(this.value)" style="width: auto; padding: 5px; display: inline-block;">
+                    <select id="region-select" onchange="manualChangeRegion(this.value)">
                         <option value="US">🇺🇸 Rest of World (USD)</option>
                         <option value="LK">🇱🇰 Sri Lanka (LKR)</option>
                         <option value="MV">🇲🇻 Maldives (MVR)</option>

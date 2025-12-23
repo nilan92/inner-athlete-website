@@ -117,7 +117,7 @@ const flagMap = {
     "LK": "🇱🇰",
     "MV": "🇲🇻",
     "US": "🇺🇸", // Default for others
-    "default": "🇺🇸"
+    "default": "🌍"
 };
 
 function applyRegionSettings(countryCode) {
@@ -297,22 +297,25 @@ function selectColor(productId, colorName, mobilePath, desktopPath, element) {
     circles.forEach(c => c.classList.remove('active'));
     element.classList.add('active');
 
-   // 3. IMAGE UPDATE WITH TRANSITION
+   // 3. IMAGE UPDATE WITH SIMPLE FADE
     const mobileImg = card.querySelector(`.main-img-${productId}`);
     const desktopSource = card.querySelector(`.source-${productId}`);
 
-    // A. Start Fade Out (Dim the image)
-    mobileImg.style.opacity = "0.6";
+    // A. Dim the image immediately to show interaction
+    mobileImg.style.opacity = "0.5";
 
-    // B. Wait 200ms, swap image, then Fade In
-    setTimeout(() => {
-        // Swap sources
+    // B. Preload the new image in background
+    const loader = new Image();
+    loader.src = mobilePath;
+
+    loader.onload = () => {
+        // C. Swap sources once ready
         desktopSource.srcset = desktopPath;
         mobileImg.src = mobilePath;
 
-        // Fade In (Restore opacity)
+        // D. Fade In (Restore opacity)
         mobileImg.style.opacity = "1";
-    }, 200);
+    };
 }
 
 // --- ADD TO CART ---
@@ -636,3 +639,54 @@ function refreshCartForNewRegion() {
     saveCart();
     updateCartUI();
 }
+
+// --- TYPEWRITER EFFECT ---
+document.addEventListener('DOMContentLoaded', () => {
+    const textElement = document.getElementById("typewriter-text");
+    
+    // The phrases to cycle through
+    const phrases = [
+        "Premium Modest Activewear", 
+        "Engineered for Motion", 
+        "Designed for Confidence",
+        "Uncompromising Quality"
+    ];
+    
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function typeEffect() {
+        const currentPhrase = phrases[phraseIndex];
+
+        // 1. Determine Text Content based on mode
+        if (isDeleting) {
+            textElement.textContent = currentPhrase.substring(0, charIndex - 1);
+            charIndex--;
+        } else {
+            textElement.textContent = currentPhrase.substring(0, charIndex + 1);
+            charIndex++;
+        }
+
+        // 2. Determine Typing Speed
+        let typeSpeed = isDeleting ? 40 : 90; // Deleting is faster than typing
+
+        // 3. Handle Transitions
+        if (!isDeleting && charIndex === currentPhrase.length) {
+            // Phrase complete: Pause for 2 seconds before deleting
+            typeSpeed = 2000; 
+            isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+            // Deletion complete: Pause briefly, then move to next phrase
+            isDeleting = false;
+            phraseIndex = (phraseIndex + 1) % phrases.length; // Loop back to 0
+            typeSpeed = 500; 
+        }
+
+        // 4. Loop
+        setTimeout(typeEffect, typeSpeed);
+    }
+
+    // Start the loop
+    typeEffect();
+});
