@@ -1,97 +1,70 @@
-# 🏃‍♀️ innerAthlete — Website & Brand Overview
+# 🛍️ innerAthlete — Shop (Web App)
 
-## Short Description
+## Overview
+This is a custom-built, serverless e-commerce interface for **innerAthlete**. Unlike standard static pages, this module functions as a lightweight Web Application with state management, geolocation-based personalization, and dynamic currency conversion.
 
-innerAthlete is a **single-page site** promoting premium, modest activewear made for confident movement and everyday performance.
+**Live Demo:** [innerathleteactive.com/shop/](https://innerathleteactive.com/shop/)
 
-## Brand Positioning
-
-| Aspect | Details |
-| :--- | :--- |
-| **Value Proposition** | Performance fabrics + modest, thoughtful design. |
-| **Target Audience** | Modest dressers seeking functional, high-quality activewear. |
-| **Tone** | Confident, respectful, community-focused, inclusive. |
-
-## Repository Purpose
-
-* Static single-page marketing site (`index.html` + assets).
-* SEO-ready basics included (**meta tags, open graph, canonical, sitemap, robots**).
+## 🛠️ Technical Stack
+* **Core:** HTML5, CSS3 (Variables, Flexbox/Grid), Vanilla JavaScript (ES6+).
+* **State Management:** `localStorage` + Runtime JS Objects.
+* **External APIs:** Cloudflare Trace (Geolocation), WhatsApp API (Checkout).
+* **Architecture:** Client-side SPA (Single Page Application) behavior without heavy frameworks.
 
 ---
 
-## 📁 Files of Interest
+## 🌍 Key Features & Logic
 
-| File/Folder | Description |
-| :--- | :--- |
-| `index.html` | Single-page site content, metadata, and canonical link. |
-| `css/style.css` | Primary site styles. |
-| `js/main.js` | Interactive behavior and animations. |
-| `sitemap.xml` | Sitemap for search engine crawlers. |
-| `robots.txt` | Crawler rules and sitemap pointer. |
-| `img/` | Site images and favicons. |
-| `js/plugins/` & `css/plugins/` | Third-party libraries (GSAP, Swiper, FontAwesome, etc). |
+### 1. Smart Geolocation & Region Locking
+The app automatically detects the user's country to serve a localized experience.
+* **Method:** Fetches client data via `/cdn-cgi/trace` to determine the ISO country code.
+* **Logic:**
+    * **Maldives (`MV`):** Switches currency to **MVR (Rf)**, updates support number to the local agent, and **locks** specific products (Top/Hijab separates) that are unavailable in that region.
+    * **Sri Lanka (`LK`):** Switches currency to **LKR (Rs)** and uses the HQ support number.
+    * **Rest of World:** Defaults to **USD ($)**.
 
----
+### 2. Reactive Cart System
+Built a custom cart engine from scratch without external dependencies.
+* **Persistency:** Cart data survives page refreshes via `localStorage`.
+* **Reactivity:** Adding items instantly updates the UI (Badge count, Cart Sidebar, Total Price) without page reloads.
+* **Dynamic Feedback:** "Add to Cart" buttons provide visual feedback (text change + animation) to confirm actions.
 
-## 👩‍💻 Flomo Notio — Marketing Agency (Footer Credit)
+### 3. Serverless WhatsApp Checkout
+To minimize costs and friction for a lean startup model, the checkout process bypasses traditional gateways.
+* **Process:** The app parses the cart object and constructs a pre-filled, URL-encoded WhatsApp message.
+* **Routing:** The message is dynamically routed to the correct sales agent based on the detected region (Maldives Agent vs. HQ).
 
-* This indicates **Flomo Notio** acted as the marketing/creative agency for the project (design, development, or launch support).
-* **Keep the footer credit link intact** unless contract/branding changes require removal.
-* If the agency needs to be listed in site metadata (for press or portfolio), add a brief **JSON-LD Organization entry** or a small "Credits" section on the site.
-
----
-
-## 🔎 SEO & Sitemap Notes
-
-### Sitemap Configuration (`sitemap.xml`)
-* This is a single-page site — `sitemap.xml` should list the root URL only:
-    ```xml
-    <loc>[https://innerathleteactive.com/](https://innerathleteactive.com/)</loc>
-    ```
-* Keep `lastmod` current when you update content.
-
-### File Accessibility
-* Ensure the **canonical link** in `index.html` matches your production domain.
-* Make `sitemap.xml` and `robots.txt` publicly accessible at:
-    * `https://innerathleteactive.com/sitemap.xml`
-    * `https://innerathleteactive.com/robots.txt`
-
-### Robots Recommendations (`robots.txt`)
-* Allow all common user-agents but block private folders (if any).
-* Include **Sitemap directive** (absolute URL).
-* An example is included in the repository at `robots.txt`.
+### 4. Performance & UX
+* **Animations:** Custom CSS keyframe animations for cart interactions (Flying particle effect) and scroll-reveal elements.
+* **Optimized Assets:** Mobile-first responsive images using the `<picture>` tag for art direction (serving different crops for Mobile vs. Desktop).
 
 ---
 
-## 🚀 Performance & Accessibility Tips (Quick)
+## 📂 Project Structure
 
-* Optimize and lazy-load images (already using `loading="lazy"`).
-* Use descriptive **alt text** for images (already present).
-* Keep critical CSS inline or ensure CSS is loaded early.
-* Verify social image (`og:image`) is accessible and sized **~1200x630** for best preview.
+shop/
+├── index.html       # Main application markup
+├── styles.css       # Scoped styles & animations
+├── script.js        # Core logic (Geolocation, Cart, UI)
+└── img/             # Product assets (WebP optimized)
 
-## 📊 Analytics & Tracking (Optional)
+## �️ Building/Minifying Assets
+After updating `styles.css` or `script.js`, run the minification script to generate optimized versions:
 
-* Add Google Analytics / GA4 or server logs for traffic insights.
-* Add structured data (JSON-LD) for Organization / WebSite if desired.
+```bash
+./minify.sh
+```
 
-## ✍️ Content & Marketing
+This will create `styles.min.css` and `script.min.js` using `minify` for CSS and `terser` for JS.
 
-* Keep the **meta description** concise and unique.
-* Update **OG and Twitter card images** when launching campaigns.
-* Use consistent brand links (replace placeholder social links when pages are ready).
+## �🚀 How to Run Locally
+Clone the repository.
 
----
+Navigate to the shop folder.
 
-## 📞 Contact
+Open index.html in a browser.
 
-* **For site updates:** Update `index.html`, `sitemap.xml`, `robots.txt` and redeploy.
-* **Brand contact (visible on site):** inquiries.innerathlete@outlook.com
+Note: Geolocation features require a live environment or a local server to avoid CORS issues with the trace API.
 
-## ⚖️ License
-
-* Content and assets: owned by **innerAthlete** (or as specified). Code in this repo is permissive for editing.
-
-## 🔁 Change Log
-
-* Track manual updates in version control commits.
+## 👨‍💻 Developer Notes
+Built by Flomo Notio. This module demonstrates how to implement complex e-commerce logic (Region-based inventory, Dynamic Pricing) using only lightweight, native web technologies for maximum performance and zero backend maintenance costs.
