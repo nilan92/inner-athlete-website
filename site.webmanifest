@@ -1,7 +1,7 @@
 {
   "name": "InnerAthlete | Premium Modest Activewear",
   "short_name": "InnerAthlete",
-  "start_url": "/shop/",
+  "start_url": "/?source=pwa",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
