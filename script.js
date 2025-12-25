@@ -63,8 +63,8 @@ const products = [
         colors: [
             { name: "Black", hex: "#000000", imgMobile: "img/modest-activewear-set-black-mobile.webp", imgDesktop: "img/modest-activewear-set-black-desktop.webp" },
             { name: "Navy Blue", hex: "#000080", imgMobile: "img/modest-activewear-set-navy-mobile.webp", imgDesktop: "img/modest-activewear-set-navy-desktop.webp" },
-            { name: "Silver", hex: "#C0C0C0", imgMobile: "img/1longline-modest-active-top-black-mobile.webp", imgDesktop: "img/1longline-modest-active-top-black-desktop.webp" },
-            { name: "Maroon", hex: "#800000", imgMobile: "img/1longline-modest-active-top-navy-mobile.webp", imgDesktop: "img/1longline-modest-active-top-navy-desktop.webp" }
+            { name: "Silver", hex: "#C0C0C0", imgMobile: "img/modest-activewear-set-silver-mobile.webp", imgDesktop: "img/modest-activewear-set-silver-desktop.webp" },
+            { name: "Maroon", hex: "#800000", imgMobile: "img/modest-activewear-set-maroon-mobile.webp", imgDesktop: "img/modest-activewear-set-maroon-desktop.webp" }
         ]
     }
 ];
