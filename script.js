@@ -27,10 +27,10 @@ const products = [
 
         sizes: ["S", "M", "L", "XL"],
         colors: [
-            { name: "Black", hex: "#000000", imgMobile: "img/1_mobile.webp", imgDesktop: "img/1_desktop.webp" },
-            { name: "Navy Blue", hex: "#000080", imgMobile: "img/2_mobile.webp", imgDesktop: "img/2_desktop.webp" },
-            { name: "Silver", hex: "#C0C0C0", imgMobile: "img/3_mobile.webp", imgDesktop: "img/3_desktop.webp" },
-            { name: "Maroon", hex: "#800000", imgMobile: "img/4_mobile.webp", imgDesktop: "img/4_desktop.webp" }
+            { name: "Black", hex: "#000000", imgMobile: "img/longline-modest-active-top-black-mobile.webp", imgDesktop: "img/longline-modest-active-top-black-desktop.webp" },
+            { name: "Navy Blue", hex: "#000080", imgMobile: "img/longline-modest-active-top-navy-mobile.webp", imgDesktop: "img/longline-modest-active-top-navy-desktop.webp" },
+            { name: "Silver", hex: "#C0C0C0", imgMobile: "img/longline-modest-active-top-silver-mobile.webp", imgDesktop: "img/longline-modest-active-top-silver-desktop.webp" },
+            { name: "Maroon", hex: "#800000", imgMobile: "img/longline-modest-active-top-maroon-mobile.webp", imgDesktop: "img/longline-modest-active-top-maroon-desktop.webp" }
         ]
     },
     {
@@ -44,10 +44,10 @@ const products = [
 
         sizes: [], // Empty array = No size selector
         colors: [
-            { name: "Black", hex: "#000000", imgMobile: "img/5_mobile.webp", imgDesktop: "img/5_desktop.webp" },
-            { name: "Navy Blue", hex: "#000080", imgMobile: "img/6_mobile.webp", imgDesktop: "img/6_desktop.webp" },
-            { name: "Silver", hex: "#C0C0C0", imgMobile: "img/7_mobile.webp", imgDesktop: "img/7_desktop.webp" },
-            { name: "Maroon", hex: "#800000", imgMobile: "img/8_mobile.webp", imgDesktop: "img/8_desktop.webp" }
+            { name: "Black", hex: "#000000", imgMobile: "img/performance-sports-hijab-black-mobile.webp", imgDesktop: "img/performance-sports-hijab-black-desktop.webp" },
+            { name: "Navy Blue", hex: "#000080", imgMobile: "img/performance-sports-hijab-navy-mobile.webp", imgDesktop: "img/performance-sports-hijab-navy-desktop.webp" },
+            { name: "Silver", hex: "#C0C0C0", imgMobile: "img/performance-sports-hijab-silver-mobile.webp", imgDesktop: "img/performance-sports-hijab-silver-desktop.webp" },
+            { name: "Maroon", hex: "#800000", imgMobile: "img/performance-sports-hijab-maroon-mobile.webp", imgDesktop: "img/performance-sports-hijab-maroon-desktop.webp" }
         ]
     },
     {
@@ -61,10 +61,10 @@ const products = [
 
         sizes: ["S", "M", "L", "XL"],
         colors: [
-            { name: "Black", hex: "#000000", imgMobile: "img/9_mobile.webp", imgDesktop: "img/9_desktop.webp" },
-            { name: "Navy Blue", hex: "#000080", imgMobile: "img/10_mobile.webp", imgDesktop: "img/10_desktop.webp" },
-            { name: "Silver", hex: "#C0C0C0", imgMobile: "img/11_mobile.webp", imgDesktop: "img/11_desktop.webp" },
-            { name: "Maroon", hex: "#800000", imgMobile: "img/12_mobile.webp", imgDesktop: "img/12_desktop.webp" }
+            { name: "Black", hex: "#000000", imgMobile: "img/modest-activewear-set-black-mobile.webp", imgDesktop: "img/modest-activewear-set-black-desktop.webp" },
+            { name: "Navy Blue", hex: "#000080", imgMobile: "img/modest-activewear-set-navy-mobile.webp", imgDesktop: "img/modest-activewear-set-navy-desktop.webp" },
+            { name: "Silver", hex: "#C0C0C0", imgMobile: "img/1longline-modest-active-top-black-mobile.webp", imgDesktop: "img/1longline-modest-active-top-black-desktop.webp" },
+            { name: "Maroon", hex: "#800000", imgMobile: "img/1longline-modest-active-top-navy-mobile.webp", imgDesktop: "img/1longline-modest-active-top-navy-desktop.webp" }
         ]
     }
 ];
@@ -276,7 +276,7 @@ function renderProducts() {
                     <h3>COMING SOON</h3>
                     <p>Individual Pieces</p>
                  </div>
-                 <img src="img/1_mobile.webp" class="card-img"> 
+                 <img src="img/longline-modest-active-top-black-mobile.webp" class="card-img"> 
             </div>
             <div class="card-body">
                 <div class="card-header">
@@ -707,7 +707,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // --- CHRISTMAS SNOW EFFECT ---
-// --- ELEGANT SNOW EFFECT ---
 function createSnowflake() {
     const snowflake = document.createElement('div');
     snowflake.classList.add('snowflake');

@@ -2,15 +2,40 @@
 <html lang="en">
 <head>
 
-      <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TJK85SWNHG"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
 
-    gtag('config', 'G-TJK85SWNHG');
-  </script>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preload" as="image" href="img/innerathlete-modest-activewear-hero-mobile.webp" media="(max-width: 899px)">
+    <link rel="preload" as="image" href="img/innerathlete-modest-activewear-hero-desktop.webp" media="(min-width: 900px)">
+
+      <!-- Google tag (gtag.js) -->
+  <script>
+    // Define the ID
+    const GA_ID = 'G-TJK85SWNHG';
+
+    // Helper to load the script
+    function loadGA() {
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+        document.head.appendChild(script);
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', GA_ID);
+    }
+
+    // Load immediately on desktop (fast connection)
+    if (window.innerWidth > 768) {
+        loadGA();
+    } else {
+        // Delay 3.5 seconds on mobile to let the LCP image load first
+        setTimeout(loadGA, 3500);
+    }
+</script>
 
 
     <meta charset="UTF-8">
@@ -37,47 +62,148 @@
     <meta property="og:url" content="https://innerathleteactive.com/">
     <meta property="og:title" content="InnerAthlete | Uncompromising Performance">
     <meta property="og:description" content="Premium modest activewear fusing full coverage with elite athletic engineering. Shop the collection now.">
-    <meta property="og:image" content="https://innerathleteactive.com/img/PREVIEW_Cover%20Photo_desktop.webp"> <meta property="og:image:width" content="1200">
+    <meta property="og:image" content="https://innerathleteactive.com/img/PREVIEW_innerathlete-modest-activewear-hero-desktop.webp"> <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
 
 
-    <script type="application/ld+json">
+   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "Product",
-      "name": "Longline Active Top",
-      "image": "https://www.innerathleteactive.com/shop/img/1_desktop.webp",
-      "description": "Modest activewear top designed for high-performance movement.",
-      "brand": {
-        "@type": "Brand",
-        "name": "InnerAthlete"
-      },
-      "offers": {
-        "@type": "Offer",
-        "url": "https://www.innerathleteactive.com/shop/",
-        "priceCurrency": "USD",
-        "price": "40.00",
-        "availability": "https://schema.org/InStock"
-      }
+      "name": "Longline Active Top (Top Only)",
+      "description": "Modest activewear top designed for high-performance movement. Features moisture-wicking fabric and an elongated cut for coverage.",
+      "image": "https://innerathleteactive.com/shop/img/longline-modest-active-top-black-desktop.webp",
+      "sku": "IA-TOP-001",
+      "brand": { "@type": "Brand", "name": "InnerAthlete" },
+      "offers": [
+        {
+          "@type": "Offer",
+          "areaServed": "US",
+          "priceCurrency": "USD",
+          "price": "40.00",
+          "priceValidUntil": "2026-12-31",
+          "availability": "https://schema.org/InStock",
+          "hasMerchantReturnPolicy": {
+             "@type": "MerchantReturnPolicy",
+             "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+             "merchantReturnDays": 7,
+             "returnMethod": "https://schema.org/ReturnByMail"
+          },
+          "shippingDetails": { "@type": "OfferShippingDetails", "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "US" } }
+        },
+        {
+          "@type": "Offer",
+          "areaServed": "LK",
+          "priceCurrency": "LKR",
+          "price": "6400",
+          "priceValidUntil": "2026-12-31",
+          "availability": "https://schema.org/InStock",
+           "hasMerchantReturnPolicy": {
+             "@type": "MerchantReturnPolicy",
+             "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+             "merchantReturnDays": 7,
+             "returnMethod": "https://schema.org/ReturnByMail"
+          },
+          "shippingDetails": { "@type": "OfferShippingDetails", "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "LK" } }
+        }
+      ]
     },
     {
       "@type": "Product",
       "name": "Performance Sports Hijab",
-      "image": "https://www.innerathleteactive.com/shop/img/5_desktop.webp",
-      "description": "Breathable, secure sports hijab for active women.",
-      "brand": {
-        "@type": "Brand",
-        "name": "InnerAthlete"
-      },
-      "offers": {
-        "@type": "Offer",
-        "url": "https://www.innerathleteactive.com/shop/",
-        "priceCurrency": "USD",
-        "price": "12.00",
-        "availability": "https://schema.org/InStock"
-      }
+      "description": "Breathable, secure sports hijab designed for active women. Stays in place during high-intensity workouts.",
+      "image": "https://innerathleteactive.com/shop/img/performance-sports-hijab-black-desktop.webp",
+      "sku": "IA-HJB-001",
+      "brand": { "@type": "Brand", "name": "InnerAthlete" },
+      "offers": [
+        {
+          "@type": "Offer",
+          "areaServed": "US",
+          "priceCurrency": "USD",
+          "price": "12.00",
+          "priceValidUntil": "2026-12-31",
+          "availability": "https://schema.org/InStock",
+          "hasMerchantReturnPolicy": {
+             "@type": "MerchantReturnPolicy",
+             "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+             "merchantReturnDays": 7,
+             "returnMethod": "https://schema.org/ReturnByMail"
+          },
+          "shippingDetails": { "@type": "OfferShippingDetails", "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "US" } }
+        },
+        {
+          "@type": "Offer",
+          "areaServed": "LK",
+          "priceCurrency": "LKR",
+          "price": "1800",
+          "priceValidUntil": "2026-12-31",
+          "availability": "https://schema.org/InStock",
+          "hasMerchantReturnPolicy": {
+             "@type": "MerchantReturnPolicy",
+             "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+             "merchantReturnDays": 7,
+             "returnMethod": "https://schema.org/ReturnByMail"
+          },
+          "shippingDetails": { "@type": "OfferShippingDetails", "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "LK" } }
+        }
+      ]
+    },
+    {
+      "@type": "Product",
+      "name": "Active Top & Hijab Set",
+      "description": "The complete modest activewear set. Includes the Longline Active Top and Performance Sports Hijab.",
+      "image": "https://innerathleteactive.com/shop/img/modest-activewear-set-black-desktop.webp",
+      "sku": "IA-SET-001",
+      "brand": { "@type": "Brand", "name": "InnerAthlete" },
+      "offers": [
+        {
+          "@type": "Offer",
+          "areaServed": "US",
+          "priceCurrency": "USD",
+          "price": "47.00",
+          "priceValidUntil": "2026-12-31",
+          "availability": "https://schema.org/InStock",
+          "hasMerchantReturnPolicy": {
+             "@type": "MerchantReturnPolicy",
+             "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+             "merchantReturnDays": 7,
+             "returnMethod": "https://schema.org/ReturnByMail"
+          },
+          "shippingDetails": { "@type": "OfferShippingDetails", "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "US" } }
+        },
+        {
+          "@type": "Offer",
+          "areaServed": "LK",
+          "priceCurrency": "LKR",
+          "price": "7600",
+          "priceValidUntil": "2026-12-31",
+          "availability": "https://schema.org/InStock",
+          "hasMerchantReturnPolicy": {
+             "@type": "MerchantReturnPolicy",
+             "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+             "merchantReturnDays": 7,
+             "returnMethod": "https://schema.org/ReturnByMail"
+          },
+          "shippingDetails": { "@type": "OfferShippingDetails", "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "LK" } }
+        },
+        {
+          "@type": "Offer",
+          "areaServed": "MV",
+          "priceCurrency": "MVR",
+          "price": "899",
+          "priceValidUntil": "2026-12-31",
+          "availability": "https://schema.org/InStock",
+          "hasMerchantReturnPolicy": {
+             "@type": "MerchantReturnPolicy",
+             "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+             "merchantReturnDays": 7,
+             "returnMethod": "https://schema.org/ReturnByMail"
+          },
+          "shippingDetails": { "@type": "OfferShippingDetails", "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "MV" } }
+        }
+      ]
     }
   ]
 }
@@ -87,7 +213,7 @@
     <meta name="twitter:url" content="https://innerathleteactive.com/">
     <meta name="twitter:title" content="InnerAthlete | Premium Modest Activewear">
     <meta name="twitter:description" content="Experience the perfect fusion of full coverage and elite athletic engineering.">
-    <meta name="twitter:image" content="https://innerathleteactive.com/img/PREVIEW_Cover%20Photo_desktop.webp">
+    <meta name="twitter:image" content="https://innerathleteactive.com/img/PREVIEW_innerathlete-modest-activewear-hero-desktop.webp">
 
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
@@ -96,16 +222,15 @@
     <link rel="icon" type="image/png" sizes="192x192" href="img/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="img/android-chrome-512x512.png">
 
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
     <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.min.css?v=1.4">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="styles.min.css?v=2.1">
 </head>
 <body>
-    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <a href="#product-list" class="skip-link">Skip to main content</a>
     <div id="promo-bar">
     <p id="promo-text">🎉 <strong>Welcome:</strong> Premium Modest Activewear</p>
     <button onclick="document.getElementById('promo-bar').style.display='none'" aria-label="Close Banner">&times;</button>
@@ -128,8 +253,8 @@
             
             <div class="hero-image-wrapper fade-in-left delay-2">
                 <div class="image-overlay"></div> <picture>
-                    <source srcset="img/Cover%20Photo_desktop.webp" media="(min-width: 900px)">
-                    <img src="img/Cover%20Photo_mobile.webp" alt="innerAthlete Model" fetchpriority="high" >
+                    <source srcset="img/innerathlete-modest-activewear-hero-desktop.webp" media="(min-width: 900px)">
+                    <img src="img/innerathlete-modest-activewear-hero-mobile.webp" alt="innerAthlete Model" fetchpriority="high" >
                 </picture>
             </div>
         </div>
@@ -163,8 +288,8 @@
             <div class="gallery-wrapper item-large scroll-reveal">
                 <div class="gallery-card">
                     <picture>
-                        <source srcset="img/Gallary%2001_desktop.webp" media="(min-width: 768px)">
-                        <img src="img/Gallary%2001_mobile.webp" alt="Breathable Fabric" loading="lazy">
+                        <source srcset="img/longline-modest-active-top-black-desktop.webp" media="(min-width: 768px)">
+                        <img src="img/longline-modest-active-top-black-mobile.webp" alt="Breathable Fabric" loading="lazy">
                     </picture>
                     <div class="gallery-overlay">
                         <div class="overlay-text"><h3>Breathability</h3><p>Air-flow technology.</p></div>
@@ -179,8 +304,8 @@
             <div class="gallery-wrapper item-tall scroll-reveal delay-1">
                 <div class="gallery-card">
                     <picture>
-                        <source srcset="img/Gallary%2002_desktop.webp" media="(min-width: 768px)">
-                        <img src="img/Gallary%2002_mobile.webp" alt="Modest Cut" loading="lazy">
+                        <source srcset="img/longline-modest-active-top-navy-desktop.webp" media="(min-width: 768px)">
+                        <img src="img/longline-modest-active-top-navy-mobile.webp" alt="Modest Cut" loading="lazy">
                     </picture>
                     <div class="gallery-overlay">
                         <div class="overlay-text"><h3>Modest Cut</h3><p>Zero compromise.</p></div>
@@ -195,8 +320,8 @@
             <div class="gallery-wrapper item-wide scroll-reveal">
                 <div class="gallery-card">
                     <picture>
-                        <source srcset="img/Gallary%2003_desktop.webp" media="(min-width: 768px)">
-                        <img src="img/Gallary%2003_mobile.webp" alt="Elegance" loading="lazy">
+                        <source srcset="img/longline-modest-active-top-silver-desktop.webp" media="(min-width: 768px)">
+                        <img src="img/longline-modest-active-top-silver-mobile.webp" alt="Elegance" loading="lazy">
                     </picture>
                     <div class="gallery-overlay">
                         <div class="overlay-text"><h3>Elegance</h3><p>Gym to Street.</p></div>
@@ -270,7 +395,14 @@
                         <option value="MV">🇲🇻 Maldives (MVR)</option>
                     </select>
                 </div>
+                 <div style="margin-top: 0; font-size: 0.75rem; opacity: 0.6;">
+                    Web Design by 
+                    <a href="https://flomonotio.com" target="_blank" style="color: inherit; text-decoration: none; font-weight: 600;">
+                        Flomo Notio
+                    </a>
+                </div>
         </div>
+       
     </footer>
 
     <div id="cart-overlay" class="overlay" onclick="toggleCart(false)"></div>
@@ -310,6 +442,6 @@
         </div>
     </div>
 
-    <script src="script.min.js?v=1.4" defer></script>
+    <script src="script.min.js?v=2.1" defer></script>
 </body>
 </html>

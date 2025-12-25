@@ -9,6 +9,16 @@
     --font-body: 'Montserrat', sans-serif; /* Clean fashion font */
 }
 
+@font-face {
+    font-family: 'Audiowide';
+    src: local('Audiowide'), url(https://fonts.gstatic.com/s/audiowide/v16/l7gdbjpo0cum0ckerdt6.woff2) format('woff2');
+    font-display: swap; /* <--- THIS IS THE MAGIC LINE */
+}
+
+h1, h2, h3, h4, p, button, span, body {
+    font-display: swap; 
+}
+
 #promo-bar {
     background-color: var(--accent); /* Uses your neon green */
     color: #000;
@@ -302,7 +312,7 @@ select {
 .cart-footer { padding: 25px; border-top: 1px solid #eee; background: #fff; }
 .total-row { display: flex; justify-content: space-between; font-weight: 800; font-size: 1.2rem; margin-bottom: 20px; }
 .btn-checkout {
-    background: #25D366; color: white;
+    background: #1da851; color: white;
     width: 100%; padding: 16px;
     border: none; border-radius: 12px;
     font-weight: 700; font-size: 1rem;
@@ -405,7 +415,7 @@ select {
 .hero-section {
     position: relative;
     /* Changed from min-height: 100vh to ensure it fits mobile content without cutting off */
-    min-height: 100vh;
+    min-height: 100dvh;
     background-color: #000000;
     display: flex;
     flex-direction: column; /* Stack vertically on mobile */
