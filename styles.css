@@ -11,7 +11,7 @@
 
 @font-face {
     font-family: 'Audiowide';
-    src: local('Audiowide'), url(https://fonts.gstatic.com/s/audiowide/v16/l7gdbjpo0cum0ckerdt6.woff2) format('woff2');
+    src: local('Audiowide'), url(./img/twitterimage_generator/Audiowide-Regular.woff2) format('woff2');
     font-display: swap; /* <--- THIS IS THE MAGIC LINE */
 }
 
