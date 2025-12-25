@@ -945,18 +945,18 @@ footer {
 /* Skip link for accessibility */
 .skip-link {
     position: absolute;
-    top: -40px;
-    left: 6px;
+    top: -100px;
+    left: 0;
     background: #000;
     color: #fff;
-    padding: 8px;
+    padding: 10px 20px;
     text-decoration: none;
-    z-index: 1000;
-    border-radius: 4px;
+    z-index: 999;
+    transition: top 0.3s;
 }
 
 .skip-link:focus {
-    top: 6px;
+    top: 0;
 }
 
 /* --- CHRISTMAS SNOW EFFECT --- */

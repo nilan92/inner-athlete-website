@@ -494,7 +494,7 @@ function updateCartUI() {
 
     if (cart.length === 0) {
         itemsList.innerHTML = `
-            <li style="list-style:none; text-align:center; padding:20px; color:#999;">
+            <li style="list-style:none; text-align:center; padding:20px; color:#555;">
                 <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
                     <i class="fa-solid fa-basket-shopping" style="font-size:2rem;"></i>
                     <p style="margin:0;">Your bag is empty</p>
