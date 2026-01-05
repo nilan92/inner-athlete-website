@@ -1,15 +1,16 @@
-# 🛍️ innerAthlete — Shop (Web App)
+# 🛍️ innerAthlete — Modest Activewear Website
 
 ## Overview
-This is a custom-built, serverless e-commerce interface for **innerAthlete**. Unlike standard static pages, this module functions as a lightweight Web Application with state management, geolocation-based personalization, and dynamic currency conversion.
+This is the main website for **innerAthlete**, a brand offering premium modest activewear for women. The site features an e-commerce interface with geolocation-based personalization, dynamic currency conversion, and a reactive cart system. Built as a lightweight web application using modern web technologies.
 
-**Live Demo:** [innerathleteactive.com/shop/](https://innerathleteactive.com/shop/)
+**Live Site:** [innerathleteactive.com](https://www.innerathleteactive.com/)
 
 ## 🛠️ Technical Stack
-* **Core:** HTML5, CSS3 (Variables, Flexbox/Grid), Vanilla JavaScript (ES6+).
+* **Frontend:** HTML5, CSS3 (Variables, Flexbox/Grid), Vanilla JavaScript (ES6 Modules).
 * **State Management:** `localStorage` + Runtime JS Objects.
 * **External APIs:** Cloudflare Trace (Geolocation), WhatsApp API (Checkout).
-* **Architecture:** Client-side SPA (Single Page Application) behavior without heavy frameworks.
+* **Build Tools:** Rollup (Bundling), Terser (Minification), Minify (CSS).
+* **Architecture:** Client-side SPA behavior with modular JS structure.
 
 ---
 
@@ -37,34 +38,71 @@ To minimize costs and friction for a lean startup model, the checkout process by
 ### 4. Performance & UX
 * **Animations:** Custom CSS keyframe animations for cart interactions (Flying particle effect) and scroll-reveal elements.
 * **Optimized Assets:** Mobile-first responsive images using the `<picture>` tag for art direction (serving different crops for Mobile vs. Desktop).
+* **Modular JS:** Code split into logical modules (`main.js`, `state.js`, `ui.js`, `cart.js`, `data.js`) for maintainability.
 
 ---
 
 ## 📂 Project Structure
 
-shop/
-├── index.html       # Main application markup
-├── styles.css       # Scoped styles & animations
-├── script.js        # Core logic (Geolocation, Cart, UI)
-└── img/             # Product assets (WebP optimized)
+```
+website_separatejs/
+├── index.html              # Main application markup
+├── styles.css              # Main styles
+├── styles.min.css          # Minified CSS (generated)
+├── js/
+│   ├── main.js             # Entry point & app initialization
+│   ├── state.js            # Geolocation & region logic
+│   ├── ui.js               # UI rendering & interactions
+│   ├── cart.js             # Cart management
+│   ├── data.js             # Product data
+│   └── bundle.min.js       # Bundled & minified JS (generated)
+├── img/                    # Optimized images
+├── minify.sh               # Build script for minification
+├── README.md               # This file
+├── robots.txt              # SEO
+├── sitemap.xml             # SEO
+├── site.webmanifest        # PWA manifest
+├── CNAME                   # GitHub Pages domain
+└── cache_buster.py         # Utility for cache busting
+```
 
-## �️ Building/Minifying Assets
-After updating `styles.css` or `script.js`, run the minification script to generate optimized versions:
+## 🏗️ Building for Production
+Run the minification script to bundle, optimize assets, and update cache busting:
 
 ```bash
 ./minify.sh
 ```
 
-This will create `styles.min.css` and `script.min.js` using `minify` for CSS and `terser` for JS.
+This will:
+- Minify `styles.css` to `styles.min.css`.
+- Bundle all JS modules starting from `js/main.js` into `js/bundle.min.js` using Rollup, then minify with Terser.
+- Generate source maps for debugging.
+- Update `index.html` with cache-busting version hashes for all assets.
 
-## �🚀 How to Run Locally
-Clone the repository.
+**Note:** The site loads `js/bundle.min.js` and `styles.min.css` in production. Keep source files for development.
 
-Navigate to the shop folder.
+## 🚀 Pushing to GitHub
+1. Commit and push your changes (GitHub Actions will auto-run `./minify.sh` and update cache busting).
+2. Or, run `./minify.sh` locally first, then push.
+3. If using GitHub Pages, the site will auto-deploy from the `main` branch.
 
-Open index.html in a browser.
-
-Note: Geolocation features require a live environment or a local server to avoid CORS issues with the trace API.
+## 🖥️ Running Locally
+1. Clone the repository.
+2. Open `index.html` in a modern browser.
+3. For full functionality (geolocation), serve via a local server to avoid CORS issues:
+   ```bash
+   python -m http.server 8000
+   ```
+   Then visit `http://localhost:8000`.
 
 ## 👨‍💻 Developer Notes
-Built by Flomo Notio. This module demonstrates how to implement complex e-commerce logic (Region-based inventory, Dynamic Pricing) using only lightweight, native web technologies for maximum performance and zero backend maintenance costs.
+Built by Flomo Notio. This project showcases building a performant e-commerce site with complex features using only native web technologies—no heavy frameworks, zero backend costs.
+
+## 🔧 Potential Improvements
+- **SEO Enhancements:** Structured data added; consider product-specific schemas.
+- **Performance:** Minification, lazy loading, cache busting implemented.
+- **PWA:** Service worker added for offline caching.
+- **Accessibility:** Test with Lighthouse for ARIA improvements.
+- **Analytics:** GA4 integrated.
+- **Testing:** Lighthouse CI runs on pushes.
+- **CI/CD:** GitHub Actions auto-builds and tests.

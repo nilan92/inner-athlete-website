@@ -4,71 +4,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - Page Not Found</title>
+    <title>404 - Page Not Found | innerAthlete</title>
     <meta name="robots" content="noindex">
+    <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Audiowide:wght@400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
         body {
-            font-family: 'Space Mono', monospace;
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #111 0%, #000 100%);
             overflow: hidden;
         }
 
-        /* Star Animation */
+        .logo-font {
+            font-family: 'Audiowide', cursive;
+        }
+
+        /* Floating Hijab Animation */
+        .floating-hijab {
+            position: absolute;
+            animation: floatHijab 8s ease-in-out infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes floatHijab {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-30px) rotate(5deg); }
+            50% { transform: translateY(-15px) rotate(-3deg); }
+            75% { transform: translateY(-40px) rotate(2deg); }
+        }
+
+        /* Star Animation (kept) */
         .star {
             position: absolute;
             width: 2px;
             height: 2px;
-            background: white;
+            background: #3ce76a;
             border-radius: 50%;
             animation: twinkle var(--duration) ease-in-out infinite;
             opacity: 0;
         }
 
         @keyframes twinkle {
-            0% {
-                opacity: 0;
-                transform: scale(0.5);
-            }
-
-            50% {
-                opacity: var(--opacity);
-                transform: scale(1.2);
-            }
-
-            100% {
-                opacity: 0;
-                transform: scale(0.5);
-            }
+            0% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: var(--opacity); transform: scale(1.2); }
+            100% { opacity: 0; transform: scale(0.5); }
         }
 
-        /* Float Animation for elements */
-        .float {
-            animation: float 6s ease-in-out infinite;
+        /* Pulse Animation for 404 */
+        .pulse-404 {
+            animation: pulseGlow 3s ease-in-out infinite;
         }
 
-        .float-delayed {
-            animation: float 6s ease-in-out 3s infinite;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0px) rotate(0deg);
-            }
-
-            50% {
-                transform: translateY(-20px) rotate(5deg);
-            }
-
-            100% {
-                transform: translateY(0px) rotate(0deg);
-            }
+        @keyframes pulseGlow {
+            0%, 100% { text-shadow: 0 0 20px rgba(60, 231, 106, 0.5); }
+            50% { text-shadow: 0 0 40px rgba(60, 231, 106, 0.8); }
         }
 
         /* Gradient Text */
         .text-gradient {
-            background: linear-gradient(to right, #a78bfa, #3b82f6);
+            background: linear-gradient(to right, #3ce76a, #a78bfa);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -78,48 +75,57 @@
 
 <body class="bg-slate-900 text-white h-screen w-full flex flex-col items-center justify-center relative">
 
+    <!-- Floating Hijabs Background -->
+    <div class="absolute inset-0 z-0 pointer-events-none">
+        <div class="floating-hijab top-20 left-10">
+            <svg width="60" height="40" viewBox="0 0 60 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 20 Q30 5 50 20 Q30 35 10 20 Z" fill="#3ce76a" opacity="0.3"/>
+            </svg>
+        </div>
+        <div class="floating-hijab top-40 right-20" style="animation-delay: 2s;">
+            <svg width="50" height="35" viewBox="0 0 50 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 17 Q25 4 42 17 Q25 30 8 17 Z" fill="#a78bfa" opacity="0.4"/>
+            </svg>
+        </div>
+        <div class="floating-hijab bottom-32 left-20" style="animation-delay: 4s;">
+            <svg width="45" height="30" viewBox="0 0 45 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 15 Q22.5 3 38 15 Q22.5 27 7 15 Z" fill="#3ce76a" opacity="0.2"/>
+            </svg>
+        </div>
+    </div>
+
     <!-- Background Stars Container -->
     <div id="star-container" class="absolute inset-0 z-0 pointer-events-none"></div>
 
     <!-- Main Content -->
     <main class="z-10 text-center px-4 max-w-2xl mx-auto">
 
-        <!-- 404 Glitch Effect Placeholder -->
-        <div class="relative mb-8 float">
-            <h1
-                class="text-9xl md:text-[12rem] font-bold tracking-tighter text-slate-800 absolute top-1 left-1 select-none blur-sm">
-                Error</h1>
-            <h1 class="text-9xl md:text-[12rem] font-bold tracking-tighter text-gradient relative z-10">Error</h1>
-
-            <!-- Decorational Planet SVG -->
-            <div class="absolute -top-10 -right-10 md:-right-20 w-24 h-24 md:w-32 md:h-32 opacity-80 float-delayed">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"
-                    class="text-purple-400 w-full h-full">
-                    <circle cx="12" cy="12" r="9" />
-                    <path d="M3.6 9h16.8" />
-                    <path d="M3.6 15h16.8" />
-                    <path d="M11.5 3a17 17 0 0 0 0 18" />
-                    <path d="M12.5 3a17 17 0 0 1 0 18" />
-                </svg>
-            </div>
+        <!-- Logo -->
+        <div class="mb-8">
+            <h1 class="logo-font text-4xl md:text-6xl text-white mb-4">innerAthlete</h1>
         </div>
 
-        <h2 class="text-2xl md:text-4xl font-bold mb-4">Houston, we have a problem.</h2>
+        <!-- 404 Effect -->
+        <div class="relative mb-8">
+            <h2 class="text-8xl md:text-[10rem] font-bold tracking-tighter text-slate-800 absolute top-1 left-1 select-none blur-sm pulse-404">404</h2>
+            <h2 class="text-8xl md:text-[10rem] font-bold tracking-tighter text-gradient relative z-10 pulse-404">404</h2>
+        </div>
+
+        <h3 class="text-2xl md:text-3xl font-bold mb-4 text-white">Oops! This page is out of bounds.</h3>
 
         <p class="text-slate-400 text-lg mb-8 max-w-md mx-auto">
-            The page you are looking for has drifted into a black hole or never existed in this galaxy.
+            The page you're looking for has gone for a run or never existed. Let's get you back on track with some premium modest activewear.
         </p>
 
         <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a href="/"
-                class="group relative px-8 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg transition-all duration-300 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)]">
+                class="group relative px-8 py-3 bg-green-600 hover:bg-green-500 text-white font-bold rounded-lg transition-all duration-300 hover:shadow-[0_0_20px_rgba(60,231,106,0.5)]">
                 Return Home
-                <span
-                    class="absolute -right-2 top-0 text-xl opacity-0 group-hover:opacity-100 group-hover:-right-8 transition-all duration-300">🚀</span>
+                <span class="absolute -right-2 top-0 text-xl opacity-0 group-hover:opacity-100 group-hover:-right-8 transition-all duration-300">🏃‍♀️</span>
             </a>
 
             <button onclick="history.back()"
-                class="px-8 py-3 border border-slate-600 hover:border-slate-400 text-slate-300 hover:text-white rounded-lg transition-colors">
+                class="px-8 py-3 border border-slate-600 hover:border-green-400 text-slate-300 hover:text-white rounded-lg transition-colors">
                 Go Back
             </button>
         </div>
@@ -127,17 +133,15 @@
     </main>
 
     <!-- Footer -->
-    <footer class="absolute bottom-4 text-slate-600 text-sm z-10">
-        <p>Error Code: 404 // Signal Lost</p>
-        <p>Website designed by // <a href="https://www.flomonotio.com"
-                class="hover:text-blue-400 transition-colors">Flomo Notio</a></p>
-
+    <footer class="absolute bottom-4 text-slate-600 text-sm z-10 text-center">
+        <p>Error Code: 404 // Page Not Found</p>
+        <p>Designed by <a href="https://www.flomonotio.com" class="hover:text-green-400 transition-colors">Flomo Notio</a></p>
     </footer>
 
     <script>
         // Generate Star Field
         const starContainer = document.getElementById('star-container');
-        const starCount = 100;
+        const starCount = 150;
 
         for (let i = 0; i < starCount; i++) {
             const star = document.createElement('div');
@@ -148,9 +152,9 @@
             const y = Math.random() * 100;
 
             // Random animation properties
-            const duration = 2 + Math.random() * 3 + 's';
+            const duration = 2 + Math.random() * 4 + 's';
             const delay = Math.random() * 5 + 's';
-            const opacity = 0.5 + Math.random() * 0.5;
+            const opacity = 0.3 + Math.random() * 0.7;
 
             star.style.left = `${x}%`;
             star.style.top = `${y}%`;
@@ -166,11 +170,24 @@
             const x = e.clientX / window.innerWidth;
             const y = e.clientY / window.innerHeight;
 
-            const moveX = (x - 0.5) * 20;
-            const moveY = (y - 0.5) * 20;
+            const moveX = (x - 0.5) * 30;
+            const moveY = (y - 0.5) * 30;
 
             starContainer.style.transform = `translate(${moveX}px, ${moveY}px)`;
         });
+
+        // Add more floating hijabs dynamically
+        setInterval(() => {
+            const hijab = document.createElement('div');
+            hijab.classList.add('floating-hijab');
+            hijab.style.left = Math.random() * 80 + 10 + '%';
+            hijab.style.top = Math.random() * 60 + 20 + '%';
+            hijab.style.animationDelay = Math.random() * 8 + 's';
+            hijab.innerHTML = '<svg width="40" height="25" viewBox="0 0 40 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 12 Q20 3 34 12 Q20 21 6 12 Z" fill="#3ce76a" opacity="0.3"/></svg>';
+            document.body.appendChild(hijab);
+
+            setTimeout(() => hijab.remove(), 8000);
+        }, 3000);
     </script>
 </body>
 
