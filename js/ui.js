@@ -158,21 +158,21 @@ export function updateFAQ(region) {
     const phoneMV = document.getElementById('faq-phone-mv');
 
     if (region.country === 'LK') {
-        if (shippingEl) shippingEl.innerText = 'Yes! We offer fast delivery across Sri Lanka (Colombo and island-wide). Shipping is free on orders over LKR 10,000.';
+        if (shippingEl) shippingEl.innerText = 'Yes! We offer fast delivery across Sri Lanka (Colombo and island-wide).';
         if (contactEl) contactEl.innerText = 'How can I contact you?';
-        if (contactTextEl) contactTextEl.innerText = 'Reach out via WhatsApp at +94 77 123 4567 for Sri Lanka.';
+        if (contactTextEl) contactTextEl.innerText = 'Reach out via WhatsApp at +94 77 188 9532 for Sri Lanka.';
         if (phoneLK) phoneLK.style.display = 'inline';
         if (phoneMV) phoneMV.style.display = 'none';
     } else if (region.country === 'MV') {
-        if (shippingEl) shippingEl.innerText = 'Yes! We offer fast delivery to the Maldives (Malé and nearby atolls). Shipping is free on orders over MVR 500.';
+        if (shippingEl) shippingEl.innerText = 'Yes! We offer fast delivery across the Maldives (Malé and nearby atolls).';
         if (contactEl) contactEl.innerText = 'How can I contact you?';
-        if (contactTextEl) contactTextEl.innerText = 'Reach out via WhatsApp at +960 123 4567 for Maldives.';
+        if (contactTextEl) contactTextEl.innerText = 'Reach out via WhatsApp at +960 971 8918 for Maldives.';
         if (phoneLK) phoneLK.style.display = 'none';
         if (phoneMV) phoneMV.style.display = 'inline';
     } else {
         if (shippingEl) shippingEl.innerText = 'Yes! We offer international shipping. Contact us for rates and delivery times.';
         if (contactEl) contactEl.innerText = 'How can I contact you?';
-        if (contactTextEl) contactTextEl.innerText = 'Reach out via WhatsApp at +94 77 123 4567 for global inquiries.';
+        if (contactTextEl) contactTextEl.innerText = 'Reach out via WhatsApp at +94 77 188 9532 for global inquiries.';
         if (phoneLK) phoneLK.style.display = 'inline';
         if (phoneMV) phoneMV.style.display = 'none';
     }
