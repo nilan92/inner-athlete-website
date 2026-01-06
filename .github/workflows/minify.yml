@@ -11,30 +11,32 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
 
-    - name: Install dependencies
-      run: npm install -g rollup terser minify lhci
+      - name: Install dependencies
+        run: npm install -g rollup terser minify lhci
 
-    - name: Run minification script
-      run: chmod +x minify.sh && ./minify.sh
+      - name: Run minification script
+        run: chmod +x minify.sh && ./minify.sh
 
-    - name: Run Lighthouse CI
-      run: lhci autorun --config=./lighthouserc.js || true
+      - name: Run Lighthouse CI
+        run: lhci autorun --config=./lighthouserc.js || true
 
-    - name: Commit and push changes
-      if: github.event_name == 'push'
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add -A
-        git diff --staged --quiet || git commit -m "Auto-minify assets"
-        git push
+      - name: Commit and push changes
+        if: github.event_name == 'push'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -A
+          git diff --staged --quiet || git commit -m "Auto-minify assets"
+          git push

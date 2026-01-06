@@ -1,5 +1,5 @@
 import { setUserRegion, getUserRegion, getActivePhone, flagMap, saveRegionToStorage, clearRegionStorage, loadRegionFromStorage } from './state.js';
-import { renderProducts, updateCartUI, toggleCart, toggleSizeModal, selectColor, initTypewriter, initScrollObserver, initSnow, updateFAQ } from './ui.js';
+import { renderProducts, updateCartUI, toggleCart, toggleSizeModal, selectColor, initTypewriter, initScrollObserver, initSnow, updateFAQ, initFAQAccordion } from './ui.js';
 import { addToCart, removeFromCart, increaseQty, decreaseQty, refreshCartPrices, getCart } from './cart.js';
 
 // Exports
@@ -100,6 +100,7 @@ async function initApp() {
     updateUIComponents();
     initTypewriter();
     initScrollObserver();
+    initFAQAccordion();
 
     // Checkbox Listener
     if(saveCheckbox) {
