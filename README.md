@@ -95,6 +95,27 @@ This will:
    ```
    Then visit `http://localhost:8000`.
 
+## ✍️ Content Management (Client Editing)
+Non-technical edits — adding/removing products, changing prices, locking a
+product out of a market, editing the size chart, or uploading product photos —
+are done through a CMS at **`/admin`** (powered by [Decap CMS](https://decapcms.org/)),
+no code required.
+
+* **Source of truth:** `content/products/*.json` and `content/size-chart.json`.
+  The CMS reads/writes these files directly (each save = a commit to `main`).
+* **Markets:** Each product has a `markets` field (`US`, `LK`, `MV`). Unticking
+  a market in the CMS instantly hides that product for shoppers in that region —
+  this replaced the old hardcoded Maldives product filter in `js/ui.js`.
+* **Auto SEO:** `scripts/build_content.py` regenerates `js/data.js`, the
+  `Product` JSON-LD structured data, and the size-guide table in `index.html`
+  straight from the content files — so a new product automatically gets correct
+  search-engine markup with no manual SEO editing. This script runs
+  automatically in CI before `minify.sh` (see `.github/workflows/minify.yml`).
+* **Images:** Product photo uploads from the CMS land in `img/products/`.
+* **Login backend:** The CMS needs a small OAuth proxy to let the client log in
+  with GitHub — see `cms-oauth-worker/README.md` for one-time setup
+  (a free Cloudflare Worker).
+
 ## 👨‍💻 Developer Notes
 Built by Flomo Notio. This project showcases building a performant e-commerce site with complex features using only native web technologies—no heavy frameworks, zero backend costs.
 

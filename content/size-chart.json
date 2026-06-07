@@ -1,0 +1,8 @@
+{
+    "rows": [
+        { "size": "S", "shoulder": "17", "chest": "20", "length": "30" },
+        { "size": "M", "shoulder": "17.5", "chest": "20.5", "length": "31" },
+        { "size": "L", "shoulder": "20", "chest": "21.5", "length": "31.5" },
+        { "size": "XL", "shoulder": "20.5", "chest": "22.5", "length": "32.5" }
+    ]
+}

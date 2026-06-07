@@ -26,6 +26,9 @@ jobs:
       - name: Install dependencies
         run: npm install -g rollup terser minify lhci
 
+      - name: Generate product data, SEO schema & size chart from CMS content
+        run: python3 scripts/build_content.py
+
       - name: Run minification script
         run: chmod +x minify.sh && ./minify.sh
 
@@ -38,5 +41,5 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add -A
-          git diff --staged --quiet || git commit -m "Auto-minify assets"
+          git diff --staged --quiet || git commit -m "Auto-build content, minify assets"
           git push

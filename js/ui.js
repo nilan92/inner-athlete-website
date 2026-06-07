@@ -13,7 +13,7 @@ export function renderProducts() {
     const region = getUserRegion();
     const isMaldives = region.country === 'MV';
 
-    const visibleProducts = isMaldives ? products.filter(p => p.id === 3) : products;
+    const visibleProducts = products.filter(p => p.markets.includes(region.country));
 
     let html = visibleProducts.map(p => {
         let price = region.code === 'LKR' ? p.priceLKR : (region.code === 'MVR' ? p.priceMVR : p.priceUSD);

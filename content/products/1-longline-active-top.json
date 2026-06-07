@@ -1,0 +1,38 @@
+{
+    "id": 1,
+    "name": "Longline Active Top (Top Only)",
+    "slug": "longline-active-top",
+    "sku": "IA-TOP-001",
+    "description": "Modest activewear top designed for high-performance movement. Features moisture-wicking fabric and an elongated cut for coverage.",
+    "priceUSD": 40.00,
+    "priceLKR": 6400,
+    "priceMVR": 550,
+    "sizes": ["S", "M", "L", "XL"],
+    "markets": ["US", "LK"],
+    "colors": [
+        {
+            "name": "Black",
+            "hex": "#000000",
+            "imgMobile": "img/longline-modest-active-top-black-mobile.webp",
+            "imgDesktop": "img/longline-modest-active-top-black-desktop.webp"
+        },
+        {
+            "name": "Navy Blue",
+            "hex": "#000080",
+            "imgMobile": "img/longline-modest-active-top-navy-mobile.webp",
+            "imgDesktop": "img/longline-modest-active-top-navy-desktop.webp"
+        },
+        {
+            "name": "Silver",
+            "hex": "#C0C0C0",
+            "imgMobile": "img/longline-modest-active-top-silver-mobile.webp",
+            "imgDesktop": "img/longline-modest-active-top-silver-desktop.webp"
+        },
+        {
+            "name": "Maroon",
+            "hex": "#800000",
+            "imgMobile": "img/longline-modest-active-top-maroon-mobile.webp",
+            "imgDesktop": "img/longline-modest-active-top-maroon-desktop.webp"
+        }
+    ]
+}
