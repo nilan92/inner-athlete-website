@@ -353,15 +353,34 @@ select {
     transform: rotate(90deg); /* Little spin on hover */
 }
 
-    .size-table { 
-        width: 100%; 
-        border-collapse: collapse; 
-        margin-top: 15px; 
+/* Text logo mark in the size guide modal (Audiowide, matches nav logo) */
+.modal-logo {
+    display: inline-block;
+    font-family: var(--font-head);
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--white);
+    background: var(--primary);
+    padding: 12px 24px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+.size-note {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+    .size-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
     }
 
-.size-table th, .size-table td { 
-    border: 1px solid #eee; 
-    padding: 10px; 
+.size-table th, .size-table td {
+    border: 1px solid #eee;
+    padding: 10px;
 }
 
 /* --- FLYING CART ANIMATION --- */
