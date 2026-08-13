@@ -73,52 +73,52 @@
 
     <!-- Product Structured Data -->
     <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Longline Active Top (Top Only)",
+  "image": "https://www.innerathleteactive.com/img/longline-modest-active-top-black-mobile.webp",
+  "description": "A premium longline active top designed for modest coverage and athletic performance.",
+  "brand": {
+    "@type": "Brand",
+    "name": "innerAthlete"
+  },
+  "offers": [
     {
-      "@context": "https://schema.org",
-      "@type": "Product",
-      "name": "Longline Active Top (Top Only)",
-      "image": "https://www.innerathleteactive.com/img/longline-modest-active-top-black-mobile.webp",
-      "description": "A premium longline active top designed for modest coverage and athletic performance.",
-      "brand": {
-        "@type": "Brand",
+      "@type": "Offer",
+      "price": "40.00",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "seller": {
+        "@type": "Organization",
+        "name": "innerAthlete"
+      }
+    },
+    {
+      "@type": "Offer",
+      "price": "7650",
+      "priceCurrency": "LKR",
+      "availability": "https://schema.org/InStock",
+      "seller": {
+        "@type": "Organization",
         "name": "innerAthlete"
       },
-      "offers": [
-        {
-          "@type": "Offer",
-          "price": "40.00",
-          "priceCurrency": "USD",
-          "availability": "https://schema.org/InStock",
-          "seller": {
-            "@type": "Organization",
-            "name": "innerAthlete"
-          }
-        },
-        {
-          "@type": "Offer",
-          "price": "7600",
-          "priceCurrency": "LKR",
-          "availability": "https://schema.org/InStock",
-          "seller": {
-            "@type": "Organization",
-            "name": "innerAthlete"
-          },
-          "areaServed": "LK"
-        },
-        {
-          "@type": "Offer",
-          "price": "550",
-          "priceCurrency": "MVR",
-          "availability": "https://schema.org/OutOfStock",
-          "seller": {
-            "@type": "Organization",
-            "name": "innerAthlete"
-          },
-          "areaServed": "MV"
-        }
-      ]
+      "areaServed": "LK"
+    },
+    {
+      "@type": "Offer",
+      "price": "550",
+      "priceCurrency": "MVR",
+      "availability": "https://schema.org/OutOfStock",
+      "seller": {
+        "@type": "Organization",
+        "name": "innerAthlete"
+      },
+      "areaServed": "MV"
     }
-    </script>
+  ]
+}
+</script>
 
     <script type="application/ld+json">
     {
@@ -243,7 +243,10 @@
       "description": "Modest activewear top designed for high-performance movement. Features moisture-wicking fabric and an elongated cut for coverage.",
       "image": "https://innerathleteactive.com/shop/img/longline-modest-active-top-black-desktop.webp",
       "sku": "IA-TOP-001",
-      "brand": { "@type": "Brand", "name": "innerAthlete" },
+      "brand": {
+        "@type": "Brand",
+        "name": "innerAthlete"
+      },
       "offers": [
         {
           "@type": "Offer",
@@ -253,27 +256,39 @@
           "priceValidUntil": "2026-12-31",
           "availability": "https://schema.org/InStock",
           "hasMerchantReturnPolicy": {
-             "@type": "MerchantReturnPolicy",
-             "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-             "merchantReturnDays": 7,
-             "returnMethod": "https://schema.org/ReturnByMail"
+            "@type": "MerchantReturnPolicy",
+            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+            "merchantReturnDays": 7,
+            "returnMethod": "https://schema.org/ReturnByMail"
           },
-          "shippingDetails": { "@type": "OfferShippingDetails", "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "US" } }
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "US"
+            }
+          }
         },
         {
           "@type": "Offer",
           "areaServed": "LK",
           "priceCurrency": "LKR",
-          "price": "7600",
+          "price": "7650",
           "priceValidUntil": "2026-12-31",
           "availability": "https://schema.org/InStock",
-           "hasMerchantReturnPolicy": {
-             "@type": "MerchantReturnPolicy",
-             "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-             "merchantReturnDays": 7,
-             "returnMethod": "https://schema.org/ReturnByMail"
+          "hasMerchantReturnPolicy": {
+            "@type": "MerchantReturnPolicy",
+            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+            "merchantReturnDays": 7,
+            "returnMethod": "https://schema.org/ReturnByMail"
           },
-          "shippingDetails": { "@type": "OfferShippingDetails", "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "LK" } }
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "LK"
+            }
+          }
         }
       ]
     },
@@ -283,7 +298,10 @@
       "description": "Breathable, secure sports hijab designed for active women. Stays in place during high-intensity workouts.",
       "image": "https://innerathleteactive.com/shop/img/performance-sports-hijab-black-desktop.webp",
       "sku": "IA-HJB-001",
-      "brand": { "@type": "Brand", "name": "innerAthlete" },
+      "brand": {
+        "@type": "Brand",
+        "name": "innerAthlete"
+      },
       "offers": [
         {
           "@type": "Offer",
@@ -293,12 +311,18 @@
           "priceValidUntil": "2026-12-31",
           "availability": "https://schema.org/InStock",
           "hasMerchantReturnPolicy": {
-             "@type": "MerchantReturnPolicy",
-             "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-             "merchantReturnDays": 7,
-             "returnMethod": "https://schema.org/ReturnByMail"
+            "@type": "MerchantReturnPolicy",
+            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+            "merchantReturnDays": 7,
+            "returnMethod": "https://schema.org/ReturnByMail"
           },
-          "shippingDetails": { "@type": "OfferShippingDetails", "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "US" } }
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "US"
+            }
+          }
         },
         {
           "@type": "Offer",
@@ -308,12 +332,18 @@
           "priceValidUntil": "2026-12-31",
           "availability": "https://schema.org/InStock",
           "hasMerchantReturnPolicy": {
-             "@type": "MerchantReturnPolicy",
-             "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-             "merchantReturnDays": 7,
-             "returnMethod": "https://schema.org/ReturnByMail"
+            "@type": "MerchantReturnPolicy",
+            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+            "merchantReturnDays": 7,
+            "returnMethod": "https://schema.org/ReturnByMail"
           },
-          "shippingDetails": { "@type": "OfferShippingDetails", "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "LK" } }
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "LK"
+            }
+          }
         }
       ]
     },
@@ -323,7 +353,10 @@
       "description": "The complete modest activewear set. Includes the Longline Active Top and Performance Sports Hijab.",
       "image": "https://innerathleteactive.com/shop/img/modest-activewear-set-black-desktop.webp",
       "sku": "IA-SET-001",
-      "brand": { "@type": "Brand", "name": "innerAthlete" },
+      "brand": {
+        "@type": "Brand",
+        "name": "innerAthlete"
+      },
       "offers": [
         {
           "@type": "Offer",
@@ -333,12 +366,18 @@
           "priceValidUntil": "2026-12-31",
           "availability": "https://schema.org/InStock",
           "hasMerchantReturnPolicy": {
-             "@type": "MerchantReturnPolicy",
-             "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-             "merchantReturnDays": 7,
-             "returnMethod": "https://schema.org/ReturnByMail"
+            "@type": "MerchantReturnPolicy",
+            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+            "merchantReturnDays": 7,
+            "returnMethod": "https://schema.org/ReturnByMail"
           },
-          "shippingDetails": { "@type": "OfferShippingDetails", "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "US" } }
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "US"
+            }
+          }
         },
         {
           "@type": "Offer",
@@ -348,12 +387,18 @@
           "priceValidUntil": "2026-12-31",
           "availability": "https://schema.org/InStock",
           "hasMerchantReturnPolicy": {
-             "@type": "MerchantReturnPolicy",
-             "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-             "merchantReturnDays": 7,
-             "returnMethod": "https://schema.org/ReturnByMail"
+            "@type": "MerchantReturnPolicy",
+            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+            "merchantReturnDays": 7,
+            "returnMethod": "https://schema.org/ReturnByMail"
           },
-          "shippingDetails": { "@type": "OfferShippingDetails", "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "LK" } }
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "LK"
+            }
+          }
         },
         {
           "@type": "Offer",
@@ -363,12 +408,18 @@
           "priceValidUntil": "2026-12-31",
           "availability": "https://schema.org/InStock",
           "hasMerchantReturnPolicy": {
-             "@type": "MerchantReturnPolicy",
-             "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-             "merchantReturnDays": 7,
-             "returnMethod": "https://schema.org/ReturnByMail"
+            "@type": "MerchantReturnPolicy",
+            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+            "merchantReturnDays": 7,
+            "returnMethod": "https://schema.org/ReturnByMail"
           },
-          "shippingDetails": { "@type": "OfferShippingDetails", "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "MV" } }
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "MV"
+            }
+          }
         }
       ]
     }
