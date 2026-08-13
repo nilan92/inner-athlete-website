@@ -1,7 +1,7 @@
 # /manage back office: custom CMS + sales log
 
 Date: 2026-08-13
-Status: Approved by user, pending spec review
+Status: Approved
 
 ## Goal
 
