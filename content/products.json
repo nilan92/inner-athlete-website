@@ -4,8 +4,8 @@
       "id": 1,
       "name": "Longline Active Top (Top Only)",
       "description": "A premium longline active top designed for modest coverage and athletic performance.",
-      "priceUSD": 40.0,
-      "priceLKR": 7600,
+      "priceUSD": 40,
+      "priceLKR": 7650,
       "priceMVR": 550,
       "sizes": [
         "S",
@@ -47,7 +47,7 @@
       "id": 2,
       "name": "Performance Sports Hijab",
       "description": "A high-performance sports hijab for active women seeking comfort and coverage.",
-      "priceUSD": 12.0,
+      "priceUSD": 12,
       "priceLKR": 2100,
       "priceMVR": 400,
       "sizes": [],
@@ -82,7 +82,7 @@
       "id": 3,
       "name": "Active Top & Hijab Set",
       "description": "A complete set including the longline active top and performance sports hijab for full modest coverage.",
-      "priceUSD": 47.0,
+      "priceUSD": 47,
       "priceLKR": 8900,
       "priceMVR": 899,
       "sizes": [
