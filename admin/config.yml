@@ -1,0 +1,63 @@
+backend:
+  name: github
+  repo: nilan92/inner-athlete-website
+  branch: main
+  base_url: https://innerathlete-cms-auth.thenilan92.workers.dev
+  auth_endpoint: auth
+
+# New images uploaded from the CMS (e.g. a new product color) land here and
+# get referenced as img/uploads/<file>, matching how every existing image
+# path in content/products.json is written (relative, no leading slash).
+media_folder: "img/uploads"
+public_folder: "img/uploads"
+
+site_url: https://www.innerathleteactive.com
+display_url: https://www.innerathleteactive.com
+
+collections:
+  - name: "products"
+    label: "Products"
+    files:
+      - name: "products"
+        label: "Products"
+        file: "content/products.json"
+        fields:
+          - label: "Products"
+            name: "products"
+            widget: "list"
+            summary: "{{fields.name}} — Rs {{fields.priceLKR}}"
+            fields:
+              - { label: "ID (never change on an existing product)", name: "id", widget: "number", value_type: "int" }
+              - { label: "Product Name", name: "name", widget: "string" }
+              - { label: "Description (used for Google search results)", name: "description", widget: "text", required: false }
+              - { label: "Price — USD ($)", name: "priceUSD", widget: "number", value_type: "float" }
+              - { label: "Price — LKR (Rs, Sri Lanka)", name: "priceLKR", widget: "number", value_type: "int" }
+              - { label: "Price — MVR (Rf, Maldives)", name: "priceMVR", widget: "number", value_type: "int" }
+              - label: "Available Sizes"
+                name: "sizes"
+                widget: "select"
+                multiple: true
+                required: false
+                hint: "Leave empty for a one-size product (e.g. the hijab)"
+                options: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"]
+              - label: "Colors"
+                name: "colors"
+                widget: "list"
+                summary: "{{fields.name}}"
+                fields:
+                  - { label: "Color Name", name: "name", widget: "string" }
+                  - { label: "Swatch Color", name: "hex", widget: "color", enableAlpha: false }
+                  - { label: "Photo — Mobile", name: "imgMobile", widget: "image" }
+                  - { label: "Photo — Desktop", name: "imgDesktop", widget: "image" }
+
+  - name: "banner"
+    label: "Top Banner"
+    files:
+      - name: "banner"
+        label: "Banner Messages"
+        file: "content/banner.json"
+        description: "The green bar at the top of the site. A different message shows depending on where the visitor is - HTML like <strong>...</strong> is allowed."
+        fields:
+          - { label: "Sri Lanka Visitors", name: "LK", widget: "string" }
+          - { label: "Maldives Visitors", name: "MV", widget: "string" }
+          - { label: "Everyone Else (International)", name: "default", widget: "string" }

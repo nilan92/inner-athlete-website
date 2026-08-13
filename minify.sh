@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Sync product prices from content/products.json into index.html's JSON-LD
+echo "Syncing product content into index.html..."
+python3 content/sync_content.py
+
 # Minify CSS
 echo "Minifying styles.css..."
 npx minify styles.css > styles.min.css

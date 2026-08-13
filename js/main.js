@@ -1,6 +1,20 @@
 import { setUserRegion, getUserRegion, getActivePhone, flagMap, saveRegionToStorage, clearRegionStorage, loadRegionFromStorage } from './state.js';
 import { renderProducts, updateCartUI, toggleCart, toggleSizeModal, selectColor, initTypewriter, initScrollObserver, initSnow, updateFAQ, initFAQAccordion } from './ui.js';
 import { addToCart, removeFromCart, increaseQty, decreaseQty, refreshCartPrices, getCart } from './cart.js';
+import { loadProducts } from './data.js';
+
+// Banner copy lives in content/banner.json (editable via /admin). Falls back
+// to the static HTML text if the fetch fails, so a network hiccup never
+// leaves the bar blank.
+let bannerCopy = null;
+async function loadBanner() {
+    try {
+        const res = await fetch('content/banner.json');
+        bannerCopy = await res.json();
+    } catch (e) {
+        console.warn("Banner content fetch failed, using default markup.");
+    }
+}
 
 // Exports
 window.addToCart = addToCart;
@@ -12,7 +26,12 @@ window.toggleSizeModal = toggleSizeModal;
 window.selectColor = selectColor;
 
 async function initApp() {
-    
+
+    // Content (products + banner copy) is fetched, not bundled, so the CMS
+    // can publish an edit without a rebuild. Runs in parallel with region
+    // detection below since neither depends on the other.
+    const contentReady = Promise.all([loadProducts(), loadBanner()]);
+
     // Christmas Effects: Snow and Santa Hat (December + Jan 1-3)
     const now = new Date();
     const isChristmas = (now.getMonth() === 11) || (now.getMonth() === 0 && now.getDate() <= 3);
@@ -97,6 +116,7 @@ async function initApp() {
     }
 
     // 3. START UI & LISTENERS
+    await contentReady;
     updateUIComponents();
     initStickyPromo();
     initTypewriter();
@@ -169,10 +189,8 @@ function updateUIComponents() {
     if(flagEl) flagEl.innerText = flagMap[region.country] || "🌍";
     
     const promo = document.getElementById("promo-text");
-    if(promo) {
-        if(region.country === 'MV') promo.innerHTML = `🎉 <strong>Maldives Launch:</strong> Exclusive Full Sets Available Now!`;
-        else if(region.country === 'LK') promo.innerHTML = `🚚 <strong>Island-wide Delivery:</strong> Get your gear in 2-3 working days.`;
-        else promo.innerHTML = `✈️ <strong>International Shipping:</strong> Now shipping globally.`;
+    if(promo && bannerCopy) {
+        promo.innerHTML = bannerCopy[region.country] || bannerCopy.default;
     }
     
     const selector = document.getElementById("region-select");
