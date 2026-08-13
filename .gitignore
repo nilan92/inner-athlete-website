@@ -1,3 +1,4 @@
 .wrangler/
 node_modules/
 .pat.env
+.DS_Store
