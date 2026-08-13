@@ -4,10 +4,10 @@ export const products = [
         name: "Longline Active Top (Top Only)",
         // PRICES
         priceUSD: 40.00,  
-        priceLKR: 6400,
+        priceLKR: 7600,
         priceMVR: 550, 
         // OPTIONS
-        sizes: ["S", "M", "L", "XL"],
+        sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"],
         colors: [
             { 
                 name: "Black", 
@@ -40,7 +40,7 @@ export const products = [
         name: "Performance Sports Hijab",
         // PRICES
         priceUSD: 12.00,
-        priceLKR: 1800,
+        priceLKR: 2100,
         priceMVR: 400,
         // OPTIONS
         sizes: [], // Empty array = No size selector
@@ -76,10 +76,10 @@ export const products = [
         name: "Active Top & Hijab Set",
         // PRICES
         priceUSD: 47.00,
-        priceLKR: 7600,
+        priceLKR: 8900,
         priceMVR: 899,
         // OPTIONS
-        sizes: ["S", "M", "L", "XL"],
+        sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"],
         colors: [
             { 
                 name: "Black", 
