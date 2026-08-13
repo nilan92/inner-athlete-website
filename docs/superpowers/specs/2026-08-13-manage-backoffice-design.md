@@ -23,9 +23,6 @@ app, instead of Decap's generic form UI plus a separate system for sales.
   `js/main.js`, not `index.html` except the one footer change below,
   which was explicitly requested. Sales are entered by hand; nothing
   auto-captures an order from the cart.
-- **No totals, summaries, or analytics.** Sales tracking means an
-  accurate, editable log — nothing more. CSV export is the deliberate
-  escape hatch for anyone who wants to crunch numbers later.
 - **No tiered access.** Catalog and sales share one password, per the
   earlier decision.
 - **No WhatsApp click-tracking build.** GA4 already auto-tracks outbound
@@ -35,6 +32,8 @@ app, instead of Decap's generic form UI plus a separate system for sales.
   this project.
 - **No rate-limiting beyond what's proportionate.** Covered in Security
   below.
+- **No blog — provisions only.** Not built now. See "Future: blog"
+  below for how the architecture already leaves room for it.
 
 ## Why not keep Decap
 
@@ -104,9 +103,51 @@ Forms for exactly the fields that exist today, not a generic list editor:
 
 - Each product: name, description, price per currency (USD/LKR/MVR),
   available sizes (checkboxes), colors (name, swatch, mobile/desktop
-  photo upload).
+  photo upload), **region availability** (see below).
 - Banner: the three region messages (Sri Lanka / Maldives /
   International), same as `content/banner.json` today.
+
+### Region availability
+
+This already exists as a hardcoded rule — `ui.js` currently shows
+*only* product id 3 (the Set) to Maldives visitors, and shows
+*everything* to everyone else. Worked through precisely, that rule is
+actually per-product today: the Top and the Hijab are each implicitly
+`["LK","US"]` (never shown in Maldives), the Set is implicitly
+`["LK","US","MV"]` (shown everywhere). That's being generalized into a
+checkbox set per product (Sri Lanka / Maldives / International), stored
+as a new `visibleRegions` array field in `content/products.json` — and
+the migration has to seed those three existing products with exactly
+those values, not a uniform "all three" default, or Maldives visitors
+would suddenly see products they don't today. A genuinely *new* product
+created later defaults to all three, since there's no existing rule to
+preserve for something that doesn't exist yet.
+
+**This needs one small storefront code change, flagged explicitly**
+since the live site was otherwise off-limits: `renderProducts()` in
+`js/ui.js` currently has the region rule hardcoded
+(`p.id === 3` for Maldives) and has to start reading `visibleRegions`
+instead. This is a live-site code change, but it's replacing an
+existing hardcoded rule with an equivalent data-driven one, not adding
+new behavior — no different in kind from the footer-link change already
+agreed to, just in `ui.js` instead of `index.html`. Confirm before this
+goes in the implementation plan.
+
+### Automatic image optimization
+
+Every existing product photo follows one convention: mobile at
+533×800, desktop at 1280×1920 (both 2:3, desktop exactly 2.4× mobile) —
+confirmed by checking the actual files. Right now that pair has to be
+hand-exported before upload. The image field in the Catalog form will
+instead take one photo and generate both sizes automatically in the
+browser (`<canvas>`, resize + re-encode as WebP — native, no library,
+free) before uploading — staff pick one photo, done.
+
+Worth naming the ceiling: this is client-side resizing, not the
+higher-end automatic-format-negotiation/CDN transforms that a paid
+product like Cloudflare Images offers. Fine for what's being asked;
+if photo quality or format handling ever becomes a real pain point,
+that paid tier is the upgrade path, not something to build now.
 
 API:
 - `GET /api/products` → current `content/products.json` contents + the
@@ -116,7 +157,9 @@ API:
 - `PUT /api/products {content, sha}` → commits the update.
 - `GET /api/banner`, `PUT /api/banner {content, sha}` → same pattern.
 - `POST /api/images {filename, base64}` → commits a new file under
-  `img/uploads/`, returns its path for the color's image field.
+  `img/uploads/`, returns its path for the color's image field. Called
+  twice per uploaded photo (mobile variant, desktop variant), both
+  generated client-side as above before either upload happens.
 
 ## Sales tab
 
@@ -147,12 +190,20 @@ not analytics, just being able to find something in a list that's grown
 past a dozen rows.
 
 A **CSV export** button downloads the current (filtered) list straight
-from the browser. This is the intentional ceiling for "basic": if anyone
-ever wants totals or trends, they open the CSV in a spreadsheet rather
-than me building a dashboard now.
+from the browser, for anyone who wants deeper analysis than what's
+built here.
+
+**Basic totals**, shown above the list: today / this month / all-time,
+summed per currency (USD/LKR/MVR kept separate, never converted/mixed —
+there's no exchange rate anywhere in this system to convert them with).
+Only **paid** sales count toward totals; pending isn't revenue yet.
+This is the agreed ceiling — trends, charts, comparisons, and anything
+beyond these three flat numbers stay out.
 
 API:
 - `GET /api/sales?status=&from=&to=` → list from D1.
+- `GET /api/sales/totals` → `{ today, thisMonth, allTime }`, each broken
+  out by currency, computed server-side from paid sales only.
 - `POST /api/sales {…}` → insert a row.
 - `PATCH /api/sales/:id {…}` → update a row (status, corrections).
 - `GET /api/sales/export?status=&from=&to=` → same query, returned as
@@ -201,6 +252,17 @@ phone as a laptop, matching how the rest of this business already runs
   there. This is the one live-site (`index.html`) change in this
   project, explicitly requested rather than incidental.
 
+## Future: blog (provisions only, not built)
+
+Not part of this project — noted so the architecture doesn't need
+reworking if a blog gets added later. It would extend the exact same
+pattern already used for products/banner: a `content/posts.json` (or
+one file per post under `content/posts/`), a third Catalog-style tab in
+`/manage`, and `GET/PUT /api/posts` following the same Contents-API
+shape as `/api/products`. No new auth, no new infrastructure, no
+different pattern to learn — just more of what's already here, whenever
+it's actually wanted.
+
 ## Migration from Decap
 
 Once `/manage` is built and verified working end to end:
@@ -244,8 +306,12 @@ Once `/manage` is built and verified working end to end:
   lists; toggle its status; export CSV and confirm it opens correctly;
   confirm a session expires/re-prompts after the token's 24h window
   (or confirm the check logically, without waiting 24 real hours).
+- Uncheck a product's region and confirm it actually disappears from
+  the storefront for that region (a real render check, not just that
+  the field saved). Upload a test photo and confirm the generated
+  mobile/desktop pair lands at the expected dimensions.
 
 ## Open questions
 
-None blocking — deferred items above (click tracking, totals,
-tiered access) are explicitly out of scope, not undecided.
+None blocking — deferred items above (click tracking, blog, tiered
+access) are explicitly out of scope, not undecided.
