@@ -1,6 +1,9 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: nilan92/inner-athlete-website
   branch: main
+  base_url: https://innerathlete-cms-auth.thenilan92.workers.dev
+  auth_endpoint: auth
 
 # New images uploaded from the CMS (e.g. a new product color) land here and
 # get referenced as img/uploads/<file>, matching how every existing image
