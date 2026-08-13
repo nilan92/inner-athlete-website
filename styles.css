@@ -659,14 +659,12 @@ select {
 }
 
 /* --- MOBILE ANIMATIONS (Default) --- */
-/* Odd items (1, 3...) swipe from Left */
-.gallery-wrapper:nth-child(odd) {
-    transform: translateX(-50px);
-}
-
-/* Even items (2...) swipe from Right */
+/* Slide up, not sideways. A card is 350px wide in a 390px viewport, so any
+   horizontal offset over ~20px pushes it past the edge and it renders
+   clipped for the length of the transition. Vertical has no such limit. */
+.gallery-wrapper:nth-child(odd),
 .gallery-wrapper:nth-child(even) {
-    transform: translateX(50px);
+    transform: translateY(50px);
 }
 
 /* --- DESKTOP OVERRIDES (Min-width 768px) --- */
