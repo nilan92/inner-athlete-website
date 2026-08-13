@@ -25,12 +25,30 @@ h1, h2, h3, h4, p, button, span, body {
     text-align: center;
     padding: 10px 20px;
     font-size: 0.85rem;
-    position: relative;
+    position: sticky;
+    top: 0;
     z-index: 1001; /* Above navbar */
+    overflow: hidden;
+    max-height: 120px; /* generous: real height is ~58px when the copy wraps */
+    transition: max-height 0.25s ease, opacity 0.2s ease, padding 0.25s ease;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 15px;
+}
+
+/* Collapse on dismiss. The nav follows automatically: the ResizeObserver
+   keeps --promo-h in step with the shrinking height, so no separate
+   nav transition is needed (and none can fall out of sync). */
+#promo-bar.dismissed {
+    max-height: 0;
+    opacity: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #promo-bar { transition: none; }
 }
 
 #promo-bar p { margin: 0; }
@@ -92,7 +110,9 @@ nav {
     justify-content: space-between;
     align-items: center;
     position: sticky;
-    top: 0;
+    /* sits below the promo bar; --promo-h tracks its real height (it wraps to
+       two lines on narrow screens) and goes to 0 when the bar is dismissed */
+    top: var(--promo-h, 0px);
     z-index: 100;
     /* border-bottom: 1px solid #eee; */
 }

@@ -98,6 +98,7 @@ async function initApp() {
 
     // 3. START UI & LISTENERS
     updateUIComponents();
+    initStickyPromo();
     initTypewriter();
     initScrollObserver();
     initFAQAccordion();
@@ -138,6 +139,27 @@ async function initApp() {
         if (event.target === modal) toggleSizeModal(false);
     };
 }
+
+// The promo bar is sticky, so the nav has to sit below whatever height it
+// actually is. Observing it covers text wrapping, region copy swaps, resizes
+// and dismissal without hardcoding a pixel offset anywhere.
+function initStickyPromo() {
+    const bar = document.getElementById("promo-bar");
+    if (!bar) return;
+
+    const syncHeight = () => document.documentElement.style
+        .setProperty('--promo-h', bar.offsetHeight + 'px');
+
+    syncHeight();
+    new ResizeObserver(syncHeight).observe(bar);
+}
+
+// Only adds the class: the collapse is CSS, and the ResizeObserver above
+// drives --promo-h down with it, so the nav glides up in lockstep.
+window.dismissPromo = function() {
+    const bar = document.getElementById("promo-bar");
+    if (bar) bar.classList.add('dismissed');
+};
 
 function updateUIComponents() {
     const region = getUserRegion();
