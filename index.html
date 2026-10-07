@@ -445,7 +445,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-    <link rel="stylesheet" href="styles.min.css?v=2176fa4f">
+    <link rel="stylesheet" href="styles.min.css?v=ea0185c3">
 </head>
 <body>
     <a href="#product-list" class="skip-link">Skip to main content</a>
@@ -705,6 +705,7 @@
     <!-- Product Details Modal -->
     <div id="product-modal" class="modal product-modal" role="dialog" aria-modal="true" aria-labelledby="pm-title" aria-hidden="true">
         <div class="product-modal-dialog" id="product-modal-dialog">
+            <span class="pm-drag-handle" aria-hidden="true"></span>
             <button class="pm-close-btn" onclick="closeProductModal()" aria-label="Close product details">
                 <i class="fa-solid fa-xmark"></i>
             </button>
@@ -714,6 +715,27 @@
         </div>
     </div>
 
-    <script type="module" src="js/bundle.min.js?v=3abc24e8"></script>
+    <!-- Social Proof Order Activity Toast -->
+    <div id="order-toast" class="order-toast" role="status" aria-live="polite" aria-hidden="true">
+        <div class="toast-inner" id="toast-clickable" role="button" tabindex="0">
+            <div class="toast-img-col">
+                <img id="toast-img" src="img/modest-activewear-set-black-mobile.webp?v=89d1cee1" alt="Product" class="toast-thumb">
+                <span class="toast-bolt"><i class="fa-solid fa-bolt"></i></span>
+            </div>
+            <div class="toast-text-col">
+                <div class="toast-buyer" id="toast-buyer"></div>
+                <div class="toast-item" id="toast-item"></div>
+                <div class="toast-meta">
+                    <span id="toast-time" class="toast-time"></span>
+                    <span class="toast-dot">•</span>
+                    <span class="toast-verified"><i class="fa-solid fa-circle-check"></i> Verified Order</span>
+                </div>
+            </div>
+            <button type="button" class="toast-close-btn" onclick="dismissOrderToast(event)" aria-label="Dismiss notification">&times;</button>
+        </div>
+        <div class="toast-progress-bar" id="toast-progress"></div>
+    </div>
+
+    <script type="module" src="js/bundle.min.js?v=069b812d"></script>
 </body>
 </html>

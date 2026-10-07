@@ -519,6 +519,10 @@ select {
     transform: scale(1) translateY(0);
 }
 
+.pm-drag-handle {
+    display: none;
+}
+
 .pm-close-btn {
     position: absolute;
     top: 14px;
@@ -589,8 +593,133 @@ select {
 @media (max-width: 820px) {
     .pm-grid {
         grid-template-columns: 1fr;
-        gap: 24px;
-        padding: 20px 18px 28px;
+        gap: 22px;
+        padding: 20px 20px 28px;
+    }
+}
+
+@media (max-width: 680px) {
+    #product-modal {
+        align-items: flex-end;
+        padding: 0;
+    }
+
+    .product-modal-dialog {
+        border-radius: 24px 24px 0 0;
+        max-height: 92vh;
+        width: 100%;
+        max-width: 100%;
+        transform: translateY(100%);
+        box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(60, 231, 106, 0.2);
+    }
+
+    #product-modal.open .product-modal-dialog {
+        transform: translateY(0);
+    }
+
+    .pm-drag-handle {
+        display: block;
+        width: 44px;
+        height: 5px;
+        background: #d8dad8;
+        border-radius: 999px;
+        margin: 10px auto 2px auto;
+        flex-shrink: 0;
+    }
+
+    .pm-close-btn {
+        top: 10px;
+        right: 12px;
+        width: 32px;
+        height: 32px;
+        font-size: 0.95rem;
+    }
+
+    .pm-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 8px 16px 20px 16px;
+    }
+
+    .pm-media-col {
+        gap: 10px;
+    }
+
+    .pm-image-wrapper {
+        aspect-ratio: 16 / 13;
+        max-height: 270px;
+        border-radius: 14px;
+    }
+
+    .pm-thumbs-strip {
+        gap: 8px;
+        padding-bottom: 2px;
+    }
+
+    .pm-thumb-btn {
+        width: 52px;
+        height: 52px;
+        border-radius: 8px;
+    }
+
+    .pm-title {
+        font-size: 1.25rem;
+        margin: 2px 0 6px 0;
+    }
+
+    .pm-price {
+        font-size: 1.25rem;
+    }
+
+    .pm-delivery-pill {
+        font-size: 0.72rem;
+        padding: 2px 8px;
+    }
+
+    .pm-highlights-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .pm-highlight-card {
+        padding: 8px 10px;
+    }
+
+    .pm-highlight-icon {
+        width: 24px;
+        height: 24px;
+        font-size: 0.75rem;
+    }
+
+    .pm-size-chips {
+        gap: 6px;
+    }
+
+    .pm-size-chip {
+        min-width: 48px;
+        height: 44px;
+        font-size: 0.88rem;
+    }
+
+    .pm-action-row {
+        position: sticky;
+        bottom: 0;
+        background: #ffffff;
+        padding: 12px 16px;
+        margin: 4px -16px -20px -16px;
+        border-top: 1px solid #ebebeb;
+        box-shadow: 0 -8px 20px rgba(0, 0, 0, 0.08);
+        z-index: 15;
+    }
+
+    .pm-btn-add {
+        height: 48px;
+        font-size: 0.92rem;
+        padding: 0 16px;
+    }
+
+    .pm-qty-stepper {
+        height: 48px;
     }
 }
 
@@ -1132,10 +1261,189 @@ select {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .pm-btn-add, .pm-size-chip, .pm-swatch, .pm-thumb-btn, .pm-highlight-card, .product-modal-dialog, .card-quick-overlay {
+    .pm-btn-add, .pm-size-chip, .pm-swatch, .pm-thumb-btn, .pm-highlight-card, .product-modal-dialog, .card-quick-overlay, .order-toast {
         transition: none !important;
         animation: none !important;
         transform: none !important;
+    }
+}
+
+/* --- ORDER ACTIVITY SOCIAL PROOF TOAST --- */
+.order-toast {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    z-index: 280;
+    max-width: 370px;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(60, 231, 106, 0.28);
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(28px) scale(0.94);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+}
+
+.order-toast.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+}
+
+.order-toast.dismissed {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(18px) scale(0.96);
+    transition: transform 0.3s ease, opacity 0.25s ease;
+}
+
+.toast-inner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+}
+
+.toast-inner:hover .toast-buyer {
+    color: #000;
+}
+
+.toast-img-col {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #f0f0f0;
+    border: 1px solid #e5e5e5;
+}
+
+.toast-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.toast-bolt {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 15px;
+    height: 15px;
+    background: #111;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.55rem;
+    color: var(--accent);
+}
+
+.toast-text-col {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 0;
+}
+
+.toast-buyer {
+    font-size: 0.8rem;
+    color: #111;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.toast-buyer span {
+    font-weight: 500;
+    color: #555;
+}
+
+.toast-item {
+    font-size: 0.76rem;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.3;
+}
+
+.toast-item b {
+    color: #000;
+}
+
+.toast-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.68rem;
+    color: #777;
+    margin-top: 1px;
+}
+
+.toast-verified {
+    color: #1da851;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.toast-dot {
+    color: #bbb;
+}
+
+.toast-close-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: #999;
+    cursor: pointer;
+    padding: 0 4px;
+    line-height: 1;
+    align-self: flex-start;
+    margin-top: -2px;
+    transition: color 0.15s, transform 0.15s;
+}
+
+.toast-close-btn:hover {
+    color: #111;
+    transform: scale(1.15);
+}
+
+.toast-progress-bar {
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), #1da851);
+    width: 100%;
+    transform-origin: left;
+}
+
+.order-toast.visible .toast-progress-bar {
+    animation: toastProgress 4.8s linear forwards;
+}
+
+@keyframes toastProgress {
+    0% { transform: scaleX(1); }
+    100% { transform: scaleX(0); }
+}
+
+@media (max-width: 680px) {
+    .order-toast {
+        left: 12px;
+        right: 12px;
+        bottom: 14px;
+        max-width: calc(100% - 24px);
     }
 }
 

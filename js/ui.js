@@ -745,3 +745,150 @@ export function initScrollObserver() {
     
     document.querySelectorAll('.scroll-reveal, .fade-in-up, .fade-in-left').forEach(el => observer.observe(el));
 }
+
+// --- SOCIAL PROOF RECENT ORDER NOTIFICATIONS ---
+let orderToastTimeout = null;
+let orderToastDismissTimeout = null;
+let activeToastProduct = null;
+let activeToastColor = null;
+
+export function initRecentOrdersToast() {
+    // Session count tracking: strictly 1 or 2 max per session
+    const shownCount = parseInt(sessionStorage.getItem('ia_toast_shown_count') || '0', 10);
+    let maxToasts = parseInt(sessionStorage.getItem('ia_toast_max_target') || '0', 10);
+    if (!maxToasts) {
+        maxToasts = Math.random() < 0.5 ? 1 : 2;
+        sessionStorage.setItem('ia_toast_max_target', maxToasts.toString());
+    }
+
+    if (shownCount >= maxToasts) return;
+
+    // Random initial delay: 5s to 9s after page load
+    const firstDelay = Math.floor(Math.random() * 4000) + 5000;
+    orderToastTimeout = setTimeout(() => {
+        showNextOrderToast();
+    }, firstDelay);
+
+    // Make toast clickable to view product
+    const clickableArea = document.getElementById("toast-clickable");
+    if (clickableArea) {
+        clickableArea.addEventListener('click', (e) => {
+            if (e.target.closest('.toast-close-btn')) return;
+            if (activeToastProduct) {
+                dismissOrderToast();
+                openProductModal(activeToastProduct.id, activeToastColor ? activeToastColor.name : undefined);
+            }
+        });
+        clickableArea.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                if (activeToastProduct) {
+                    dismissOrderToast();
+                    openProductModal(activeToastProduct.id, activeToastColor ? activeToastColor.name : undefined);
+                }
+            }
+        });
+    }
+}
+
+function showNextOrderToast() {
+    const shownCount = parseInt(sessionStorage.getItem('ia_toast_shown_count') || '0', 10);
+    const maxToasts = parseInt(sessionStorage.getItem('ia_toast_max_target') || '1', 10);
+    if (shownCount >= maxToasts) return;
+
+    // Postpone if modal or cart is currently open
+    const prodModal = document.getElementById("product-modal");
+    const cartSidebar = document.getElementById("cart-sidebar");
+    if ((prodModal && prodModal.classList.contains("open")) || (cartSidebar && cartSidebar.classList.contains("open"))) {
+        orderToastTimeout = setTimeout(showNextOrderToast, 12000);
+        return;
+    }
+
+    const toastEl = document.getElementById("order-toast");
+    if (!toastEl || !products || products.length === 0) return;
+
+    const region = getUserRegion();
+    const isMaldives = region.country === 'MV';
+
+    // Regional buyers pool
+    const buyersLK = [
+        { name: "Nadia", city: "Colombo" },
+        { name: "Fathima", city: "Kandy" },
+        { name: "Ayesha", city: "Dehiwala" },
+        { name: "Shenali", city: "Galle" },
+        { name: "Dinithi", city: "Negombo" },
+        { name: "Mariam", city: "Batticaloa" },
+        { name: "Rifka", city: "Kurunegala" }
+    ];
+
+    const buyersMV = [
+        { name: "Aminath", city: "Malé" },
+        { name: "Mariyam", city: "Hulhumalé" },
+        { name: "Hawwa", city: "Addu City" },
+        { name: "Fathimath", city: "Malé" },
+        { name: "Aishath", city: "Fuvahmulah" }
+    ];
+
+    const buyersGlobal = [
+        { name: "Sarah", city: "London" },
+        { name: "Amina", city: "Dubai" },
+        { name: "Layla", city: "Toronto" },
+        { name: "Zainab", city: "Sydney" },
+        { name: "Fatima", city: "Kuala Lumpur" },
+        { name: "Noor", city: "Doha" }
+    ];
+
+    const buyerPool = region.country === 'LK' ? buyersLK : (isMaldives ? buyersMV : buyersGlobal);
+    const buyer = buyerPool[Math.floor(Math.random() * buyerPool.length)];
+
+    // In Maldives only set (id:3) is available
+    const availableProducts = isMaldives ? products.filter(p => p.id === 3) : products;
+    const product = availableProducts[Math.floor(Math.random() * availableProducts.length)];
+    const color = product.colors[Math.floor(Math.random() * product.colors.length)];
+
+    activeToastProduct = product;
+    activeToastColor = color;
+
+    const times = ["Just now", "2 mins ago", "4 mins ago", "7 mins ago", "9 mins ago"];
+    const time = times[Math.floor(Math.random() * times.length)];
+
+    const buyerEl = document.getElementById("toast-buyer");
+    const itemEl = document.getElementById("toast-item");
+    const timeEl = document.getElementById("toast-time");
+    const imgEl = document.getElementById("toast-img");
+
+    if (buyerEl) buyerEl.innerHTML = `${buyer.name} <span>from ${buyer.city}</span>`;
+    if (itemEl) itemEl.innerHTML = `Purchased <b>${product.name}</b> (${color.name})`;
+    if (timeEl) timeEl.textContent = time;
+    if (imgEl) {
+        imgEl.src = color.imgMobile;
+        imgEl.alt = product.name;
+    }
+
+    toastEl.classList.remove("dismissed");
+    toastEl.classList.add("visible");
+    toastEl.setAttribute("aria-hidden", "false");
+
+    const newCount = shownCount + 1;
+    sessionStorage.setItem('ia_toast_shown_count', newCount.toString());
+
+    // Auto dismiss after 4.8s
+    orderToastDismissTimeout = setTimeout(() => {
+        dismissOrderToast();
+
+        // If session target is 2 and we just showed 1, schedule the second toast
+        if (newCount < maxToasts) {
+            const secondDelay = Math.floor(Math.random() * 12000) + 20000; // 20s to 32s later
+            orderToastTimeout = setTimeout(showNextOrderToast, secondDelay);
+        }
+    }, 4800);
+}
+
+export function dismissOrderToast(e) {
+    if (e && e.stopPropagation) e.stopPropagation();
+    const toastEl = document.getElementById("order-toast");
+    if (!toastEl) return;
+    toastEl.classList.remove("visible");
+    toastEl.classList.add("dismissed");
+    toastEl.setAttribute("aria-hidden", "true");
+    if (orderToastDismissTimeout) clearTimeout(orderToastDismissTimeout);
+}

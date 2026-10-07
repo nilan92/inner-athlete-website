@@ -3,7 +3,7 @@ import {
     renderProducts, updateCartUI, toggleCart, toggleSizeModal, selectColor, 
     initTypewriter, initScrollObserver, initSnow, updateFAQ, initFAQAccordion,
     openProductModal, closeProductModal, selectModalColor, selectModalSize, updateModalQty, addModalProductToCart,
-    updateProductModalIfOpen 
+    updateProductModalIfOpen, initRecentOrdersToast, dismissOrderToast 
 } from './ui.js';
 import { addToCart, removeFromCart, increaseQty, decreaseQty, refreshCartPrices, getCart } from './cart.js';
 import { loadProducts } from './data.js';
@@ -35,6 +35,7 @@ window.selectModalColor = selectModalColor;
 window.selectModalSize = selectModalSize;
 window.updateModalQty = updateModalQty;
 window.addModalProductToCart = addModalProductToCart;
+window.dismissOrderToast = dismissOrderToast;
 
 async function initApp() {
 
@@ -133,6 +134,7 @@ async function initApp() {
     initTypewriter();
     initScrollObserver();
     initFAQAccordion();
+    initRecentOrdersToast();
 
     // Checkbox Listener
     if(saveCheckbox) {
