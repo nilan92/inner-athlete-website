@@ -332,6 +332,41 @@ export function closeProductModal() {
     document.body.style.overflow = "";
 }
 
+function getDeliveryInfo(region) {
+    if (region.country === 'LK') {
+        return {
+            badge: "Island-wide Delivery (2–3 Days)",
+            destination: "Sri Lanka (Colombo & Island-wide)",
+            timeframe: "2–3 working days",
+            description: "Fast island-wide delivery straight to your doorstep across Colombo and all districts.",
+            support: "Questions on sizing or delivery? Chat with our HQ on WhatsApp at +94 77 188 9532."
+        };
+    } else if (region.country === 'MV') {
+        return {
+            badge: "Fast Delivery to Malé & Atolls",
+            destination: "Maldives (Malé & nearby Atolls)",
+            timeframe: "Fast delivery to Malé & Atolls",
+            description: "Direct dispatch via our local Maldives partner. Full Sets available now with localized service.",
+            support: "Reach out to our Maldives WhatsApp agent at +960 971 8918 for immediate order assistance."
+        };
+    } else {
+        return {
+            badge: "Worldwide Shipping Available",
+            destination: "International (Worldwide)",
+            timeframe: "Prompt international courier dispatch",
+            description: "We ship internationally! Fast global dispatch with full tracking provided for every order.",
+            support: "For international shipping rates and delivery inquiries, contact our HQ on WhatsApp at +94 77 188 9532."
+        };
+    }
+}
+
+export function updateProductModalIfOpen() {
+    const modal = document.getElementById("product-modal");
+    if (modal && modal.classList.contains("open") && currentModalProduct) {
+        renderProductModalContent();
+    }
+}
+
 function renderProductModalContent() {
     const modalBody = document.getElementById("product-modal-content");
     if (!modalBody || !currentModalProduct) return;
@@ -339,6 +374,7 @@ function renderProductModalContent() {
     const p = currentModalProduct;
     const region = getUserRegion();
     const price = region.code === 'LKR' ? p.priceLKR : (region.code === 'MVR' ? p.priceMVR : p.priceUSD);
+    const delivery = getDeliveryInfo(region);
     const spec = PRODUCT_SPECS[p.id] || {
         tagline: "PRO ELITE // ACTIVEWEAR",
         badge: "HIGH PERFORMANCE",
@@ -385,6 +421,7 @@ function renderProductModalContent() {
                             <span class="pm-price" id="pm-unit-price">${region.symbol} ${price.toFixed(2)}</span>
                             <span class="pm-curr-tag">${region.code}</span>
                             <span class="pm-status-tag"><i class="fa-solid fa-circle-check"></i> In Stock</span>
+                            <span class="pm-delivery-pill"><i class="fa-solid fa-truck-fast"></i> ${delivery.badge}</span>
                         </div>
                     </div>
 
@@ -468,7 +505,7 @@ function renderProductModalContent() {
 
                     <!-- Sporty Specs Accordion -->
                     <div class="pm-accordion">
-                        <details class="pm-accordion-item" open>
+                        <details class="pm-accordion-item">
                             <summary><i class="fa-solid fa-shirt"></i> Fabric & Fit</summary>
                             <div class="pm-accordion-content">
                                 <p><strong>Fabric:</strong> ${spec.fabric}</p>
@@ -481,10 +518,13 @@ function renderProductModalContent() {
                                 <p>${spec.care}</p>
                             </div>
                         </details>
-                        <details class="pm-accordion-item">
+                        <details class="pm-accordion-item" open>
                             <summary><i class="fa-solid fa-truck-fast"></i> Shipping & Support</summary>
                             <div class="pm-accordion-content">
-                                <p>Direct delivery across Sri Lanka and Maldives. Fast WhatsApp customer support for sizing advice and questions.</p>
+                                <p><strong><i class="fa-solid fa-location-dot"></i> Region:</strong> ${delivery.destination}</p>
+                                <p><strong><i class="fa-solid fa-clock"></i> Estimated Delivery:</strong> ${delivery.timeframe}</p>
+                                <p>${delivery.description}</p>
+                                <p class="pm-shipping-support"><strong><i class="fa-brands fa-whatsapp" style="color: #25d366;"></i> WhatsApp Support:</strong> ${delivery.support}</p>
                             </div>
                         </details>
                     </div>

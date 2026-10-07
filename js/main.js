@@ -2,7 +2,8 @@ import { setUserRegion, getUserRegion, getActivePhone, flagMap, saveRegionToStor
 import { 
     renderProducts, updateCartUI, toggleCart, toggleSizeModal, selectColor, 
     initTypewriter, initScrollObserver, initSnow, updateFAQ, initFAQAccordion,
-    openProductModal, closeProductModal, selectModalColor, selectModalSize, updateModalQty, addModalProductToCart 
+    openProductModal, closeProductModal, selectModalColor, selectModalSize, updateModalQty, addModalProductToCart,
+    updateProductModalIfOpen 
 } from './ui.js';
 import { addToCart, removeFromCart, increaseQty, decreaseQty, refreshCartPrices, getCart } from './cart.js';
 import { loadProducts } from './data.js';
@@ -232,6 +233,7 @@ function updateUIComponents() {
     renderProducts();
     updateCartUI(cart);
     updateFAQ(region);
+    updateProductModalIfOpen();
 }
 
 // Manual Override Logic
