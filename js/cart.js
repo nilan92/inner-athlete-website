@@ -50,18 +50,30 @@ export function addToCart(productId, options = {}) {
         if (isFirstCartClick) { runFlyingAnimation(clickedBtn); isFirstCartClick = false; } 
         else { triggerBounceAnimation(); } 
 
-        const originalText = clickedBtn.innerHTML;
-        clickedBtn.innerHTML = `Added! <i class="fa-solid fa-check"></i>`;
-        const originalBg = clickedBtn.style.background;
-        const originalColor = clickedBtn.style.color;
-        clickedBtn.style.background = "#1da851"; 
-        clickedBtn.style.color = "#fff";
-        if (clickedBtn.feedbackTimeout) clearTimeout(clickedBtn.feedbackTimeout);
-        clickedBtn.feedbackTimeout = setTimeout(() => {
-            clickedBtn.innerHTML = originalText;
-            clickedBtn.style.background = originalBg; 
-            clickedBtn.style.color = originalColor;
-        }, 1500);
+        const modalTextEl = clickedBtn.querySelector('#pm-btn-text');
+        if (modalTextEl) {
+            // Keep price badge and stepper reactive while showing success state
+            modalTextEl.innerHTML = `<i class="fa-solid fa-check"></i> Added!`;
+            clickedBtn.classList.add("pm-btn-added");
+            if (clickedBtn.feedbackTimeout) clearTimeout(clickedBtn.feedbackTimeout);
+            clickedBtn.feedbackTimeout = setTimeout(() => {
+                if (modalTextEl) modalTextEl.innerHTML = `<i class="fa-solid fa-bag-shopping"></i> Add to Bag`;
+                if (clickedBtn) clickedBtn.classList.remove("pm-btn-added");
+            }, 1500);
+        } else {
+            const originalText = clickedBtn.innerHTML;
+            clickedBtn.innerHTML = `Added! <i class="fa-solid fa-check"></i>`;
+            const originalBg = clickedBtn.style.background;
+            const originalColor = clickedBtn.style.color;
+            clickedBtn.style.background = "#1da851"; 
+            clickedBtn.style.color = "#fff";
+            if (clickedBtn.feedbackTimeout) clearTimeout(clickedBtn.feedbackTimeout);
+            clickedBtn.feedbackTimeout = setTimeout(() => {
+                clickedBtn.innerHTML = originalText;
+                clickedBtn.style.background = originalBg; 
+                clickedBtn.style.color = originalColor;
+            }, 1500);
+        }
     } else {
         triggerBounceAnimation();
     }

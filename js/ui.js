@@ -363,6 +363,11 @@ function getDeliveryInfo(region) {
 export function updateProductModalIfOpen() {
     const modal = document.getElementById("product-modal");
     if (modal && modal.classList.contains("open") && currentModalProduct) {
+        const region = getUserRegion();
+        if (region.country === 'MV' && currentModalProduct.id !== 3) {
+            closeProductModal();
+            return;
+        }
         renderProductModalContent();
     }
 }
@@ -497,9 +502,8 @@ function renderProductModalContent() {
                             </button>
                         </div>
                         <button type="button" id="pm-add-btn" class="pm-btn-add" onclick="addModalProductToCart(${p.id})">
-                            <span class="pm-btn-text">Add to Cart</span>
+                            <span class="pm-btn-text" id="pm-btn-text"><i class="fa-solid fa-bag-shopping"></i> Add to Bag</span>
                             <span class="pm-btn-price" id="pm-btn-total">${region.symbol} ${(price * currentModalQty).toFixed(2)}</span>
-                            <i class="fa-solid fa-plus"></i>
                         </button>
                     </div>
 
@@ -638,18 +642,6 @@ export function addModalProductToCart(productId) {
             qty: currentModalQty,
             sourceBtn: modalBtn
         });
-    }
-
-    if (modalBtn) {
-        const originalContent = modalBtn.innerHTML;
-        modalBtn.innerHTML = `<span class="pm-btn-text">Added to Bag!</span> <i class="fa-solid fa-check"></i>`;
-        modalBtn.style.background = "#1da851";
-        modalBtn.style.borderColor = "#1da851";
-        setTimeout(() => {
-            modalBtn.innerHTML = originalContent;
-            modalBtn.style.background = "";
-            modalBtn.style.borderColor = "";
-        }, 1500);
     }
 }
 
