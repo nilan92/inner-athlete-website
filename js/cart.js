@@ -7,13 +7,28 @@ let isFirstCartClick = true;
 
 export function getCart() { return cart; }
 
-export function addToCart(productId) {
+export function addToCart(productId, options = {}) {
     const product = products.find(p => p.id === productId);
+    if (!product) return;
+
     const card = document.getElementById(`product-${productId}`);
-    const clickedBtn = card.querySelector('.btn-add');
-    const sizeInput = document.getElementById(`size-${productId}`);
-    const size = sizeInput ? sizeInput.value : "-";
-    const color = card.getAttribute('data-selected-color');
+    const clickedBtn = options.sourceBtn || (card ? card.querySelector('.btn-add') : null);
+    
+    let size = options.size;
+    if (size === undefined) {
+        const sizeInput = document.getElementById(`size-${productId}`);
+        size = sizeInput ? sizeInput.value : "-";
+    }
+    
+    let color = options.color;
+    if (!color && card) {
+        color = card.getAttribute('data-selected-color');
+    }
+    if (!color && product.colors && product.colors.length > 0) {
+        color = product.colors[0].name;
+    }
+    
+    const qty = Math.max(1, parseInt(options.qty || 1, 10));
     const region = getUserRegion();
     
     let finalPrice = product.priceUSD;
@@ -23,25 +38,33 @@ export function addToCart(productId) {
     const variantId = `${product.id}-${size}-${color}-${region.code}`;
     const existing = cart.find(item => item.variantId === variantId);
 
-    if (existing) existing.qty++;
+    if (existing) existing.qty += qty;
     else cart.push({
         variantId, id: product.id, name: product.name, price: finalPrice,
-        currency: region.code, symbol: region.symbol, size, color, qty: 1
+        currency: region.code, symbol: region.symbol, size, color, qty
     });
 
     saveCart();
 
-    if (isFirstCartClick) { runFlyingAnimation(clickedBtn); isFirstCartClick = false; } 
-    else { triggerBounceAnimation(); } 
+    if (clickedBtn) {
+        if (isFirstCartClick) { runFlyingAnimation(clickedBtn); isFirstCartClick = false; } 
+        else { triggerBounceAnimation(); } 
 
-    const originalText = clickedBtn.innerHTML;
-    clickedBtn.innerHTML = `Added! <i class="fa-solid fa-check"></i>`;
-    clickedBtn.style.background = "#1da851"; clickedBtn.style.color = "#fff";
-    if (clickedBtn.feedbackTimeout) clearTimeout(clickedBtn.feedbackTimeout);
-    clickedBtn.feedbackTimeout = setTimeout(() => {
-        clickedBtn.innerHTML = originalText;
-        clickedBtn.style.background = ""; clickedBtn.style.color = "";
-    }, 1500);
+        const originalText = clickedBtn.innerHTML;
+        clickedBtn.innerHTML = `Added! <i class="fa-solid fa-check"></i>`;
+        const originalBg = clickedBtn.style.background;
+        const originalColor = clickedBtn.style.color;
+        clickedBtn.style.background = "#1da851"; 
+        clickedBtn.style.color = "#fff";
+        if (clickedBtn.feedbackTimeout) clearTimeout(clickedBtn.feedbackTimeout);
+        clickedBtn.feedbackTimeout = setTimeout(() => {
+            clickedBtn.innerHTML = originalText;
+            clickedBtn.style.background = originalBg; 
+            clickedBtn.style.color = originalColor;
+        }, 1500);
+    } else {
+        triggerBounceAnimation();
+    }
     
     // PASS CART DATA HERE
     updateCartUI(cart);

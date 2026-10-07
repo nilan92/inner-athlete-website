@@ -445,7 +445,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-    <link rel="stylesheet" href="styles.min.css?v=613e0e68">
+    <link rel="stylesheet" href="styles.min.css?v=42d97040">
 </head>
 <body>
     <a href="#product-list" class="skip-link">Skip to main content</a>
@@ -702,6 +702,18 @@
         </div>
     </div>
 
-    <script type="module" src="js/bundle.min.js?v=d1505eeb"></script>
+    <!-- Product Details Modal -->
+    <div id="product-modal" class="modal product-modal" role="dialog" aria-modal="true" aria-labelledby="pm-title" aria-hidden="true">
+        <div class="product-modal-dialog" id="product-modal-dialog">
+            <button class="pm-close-btn" onclick="closeProductModal()" aria-label="Close product details">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="product-modal-content" class="product-modal-body">
+                <!-- Dynamically rendered by openProductModal -->
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/bundle.min.js?v=038fce91"></script>
 </body>
 </html>

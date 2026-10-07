@@ -1,5 +1,9 @@
 import { setUserRegion, getUserRegion, getActivePhone, flagMap, saveRegionToStorage, clearRegionStorage, loadRegionFromStorage } from './state.js';
-import { renderProducts, updateCartUI, toggleCart, toggleSizeModal, selectColor, initTypewriter, initScrollObserver, initSnow, updateFAQ, initFAQAccordion } from './ui.js';
+import { 
+    renderProducts, updateCartUI, toggleCart, toggleSizeModal, selectColor, 
+    initTypewriter, initScrollObserver, initSnow, updateFAQ, initFAQAccordion,
+    openProductModal, closeProductModal, selectModalColor, selectModalSize, updateModalQty, addModalProductToCart 
+} from './ui.js';
 import { addToCart, removeFromCart, increaseQty, decreaseQty, refreshCartPrices, getCart } from './cart.js';
 import { loadProducts } from './data.js';
 
@@ -24,6 +28,12 @@ window.decreaseQty = decreaseQty;
 window.toggleCart = toggleCart;
 window.toggleSizeModal = toggleSizeModal;
 window.selectColor = selectColor;
+window.openProductModal = openProductModal;
+window.closeProductModal = closeProductModal;
+window.selectModalColor = selectModalColor;
+window.selectModalSize = selectModalSize;
+window.updateModalQty = updateModalQty;
+window.addModalProductToCart = addModalProductToCart;
 
 async function initApp() {
 
@@ -155,9 +165,25 @@ async function initApp() {
     }
 
     window.onclick = function(event) {
-        const modal = document.getElementById("size-modal");
-        if (event.target === modal) toggleSizeModal(false);
+        const sizeModal = document.getElementById("size-modal");
+        if (event.target === sizeModal) toggleSizeModal(false);
+        const prodModal = document.getElementById("product-modal");
+        if (event.target === prodModal) closeProductModal();
     };
+
+    window.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            const sizeModal = document.getElementById("size-modal");
+            if (sizeModal && sizeModal.style.display === "flex") {
+                toggleSizeModal(false);
+                return;
+            }
+            const prodModal = document.getElementById("product-modal");
+            if (prodModal && prodModal.classList.contains("open")) {
+                closeProductModal();
+            }
+        }
+    });
 }
 
 // The promo bar is sticky, so the nav has to sit below whatever height it
